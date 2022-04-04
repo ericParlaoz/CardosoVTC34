@@ -1,0 +1,26 @@
+body {
+    font-family: "Lato", Arial, Helvetica, sans-serif;
+    text-align: center;
+    /* On peut définir un fond en couleurs dégradées à l'aide de la fonction css linear-gradient qui peut prendre différentes couleurs et les disposer en interpolant entre chaque pour créer un effet de dégradé*/
+    /* On peut orienter le dégradé en spécifiant une orientation sous la forme d'un angle en degrés */
+    background: linear-gradient(
+            180deg,
+            rgba(51, 128, 177, 1) 0%,
+            rgba(233, 170, 179, 1) 100%
+    );
+    /* en spécifiant background-attachement fixed on indique la volonté d'attacher le fond dégradé non pas à notre élément <body> mais au "viewport" qui est la vue entière dans laquelle notre page s'affiche */
+}
+
+.bouton {
+    color: #FFFFFF;
+    border-radius: 20px;
+}
+
+.row-admin {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.27);
+    background-color: #FFFFFF;
+
+}

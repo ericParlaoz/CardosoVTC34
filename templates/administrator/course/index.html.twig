@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Course index{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row-admin">
+            <H1 class="title card-header text-center">Liste des courses</H1>
+            <div class="card-body text-center">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Adresse de départ</th>
+                        <th>Adresse d'arrivee</th>
+                        <th>Passagers</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for course in courses %}
+                        <tr>
+                            <td>{{ course.id }}</td>
+                            <td>{{ course.adresseDepart }}</td>
+                            <td>{{ course.adresseArrivee }}</td>
+                            <td>{{ course.passagers }}</td>
+                            <td>{{ course.date ? course.date|date('d-m-Y H:i') : '' }}</td>
+                            <td>
+                                <a class="bouton btn btn-primary" href="{{ path('course_show', {'id': course.id}) }}">Voir</a>
+                                <a class="bouton btn btn-success" href="{{ path('course_edit', {'id': course.id}) }}">Éditer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">Pas de résultat</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a class="bouton btn btn-success" href="{{ path('course_new') }}">Nouveau</a>
+                <a class="bouton btn btn-primary" href="{{ path('admin') }}">Retour</a>
+            </div>
+            </div>
+        </div>
+{% endblock %}

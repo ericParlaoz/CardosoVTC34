@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}calendier{% endblock %}
+
+{% block body %}
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link href='fullcalendar/main.css' rel='stylesheet' />
+    <script src='fullcalendar/main.js'></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'timeGridWeek',
+          locale: 'fr',
+            timeZone: 'Europe/Paris',
+            headerToolbar: {
+              start: 'prev,next today',
+              center: 'title',
+              end: 'dayGridMonth,timeGridWeek',
+            },
+          buttonText:{
+            today:    'Aujourdhui',
+            month:    'Mois',
+            week:     'Semaine',
+            day:      'Jour',
+            list:     'Liste'
+          },
+
+          events:{{ data| raw }},
+
+          editable: true
+
+
+        });
+
+
+        calendar.render();
+      });
+    </script>
+  </head>
+  <body>
+  <div class="position-relative">
+    <div class="w-75 p-3" id='calendar'></div>
+  </div>
+  </body>
+</html>
+  <a class="btn btn-primary" href="{{ path('calendrier_index') }}">Infos clients</a>
+  <a class="btn btn-primary" href="{{ path('calendrier_new') }}">Nouveau</a>
+  <a class="btn btn-success" href="{{ path('admin') }}">Retour</a>
+
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement sécurisé | Cardoso VTC 34{% endblock %}
+{% block meta_description %}Cardoso VTC votre chauffeur privée dur Frontignan{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const clientSecret = '{{ client_secret }}';
+        //const stripe = Stripe("pk_test_51K6DadC3XeU2BQcybg4hGjhT0qETuv5fO5XYoRe6TSqJOfY0GDsUyphNZRJGub87l8aHHpgN1TLFDzOAgdyHUlTT00czvFrRDK");
+        const stripe = Stripe("pk_test_51HbssvLRBWLTOqzddMUU37ssFGYYBdqHh86iqjDb4OKY4TKNiTAjPoid8Cfjuj6gmwmcp6DUL9OmZXzIBXmX5SiH00C7eUbqMz");
+        let elements;
+
+        document
+            .querySelector("#payment-form")
+            .addEventListener("submit", handleSubmit);
+
+        elements = stripe.elements({clientSecret});
+
+        const paymentElement = elements.create("payment");
+        paymentElement.mount("#payment-element");
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+            setLoading(true);
+
+            const {error} = await stripe.confirmPayment({
+                elements,
+                confirmParams: {
+                    // Make sure to change this to your payment completion page
+                    return_url: "http://127.0.0.1:8000/success",
+                },
+            });
+
+            // This point will only be reached if there is an immediate error when
+            // confirming the payment. Otherwise, your customer will be redirected to
+            // your `return_url`. For some payment methods like iDEAL, your customer will
+            // be redirected to an intermediate site first to authorize the payment, then
+            // redirected to the `return_url`.
+            if (error.type === "card_error" || error.type === "validation_error") {
+                showMessage(error.message);
+            } else {
+                showMessage("Erreur.");
+            }
+
+            setLoading(false);
+        }
+
+        // Fetches the payment intent status after payment submission
+        async function checkStatus() {
+            const clientSecret = new URLSearchParams(window.location.search).get(
+                "payment_intent_client_secret"
+            );
+
+            if (!clientSecret) {
+                return;
+            }
+
+            const {paymentIntent} = await stripe.retrievePaymentIntent(clientSecret);
+
+            switch (paymentIntent.status) {
+                case "succeeded":
+                    showMessage("Payment succeeded!");
+                    break;
+                case "processing":
+                    showMessage("Your payment is processing.");
+                    break;
+                case "requires_payment_method":
+                    showMessage("Your payment was not successful, please try again.");
+                    break;
+                default:
+                    showMessage("Something went wrong.");
+                    break;
+            }
+        }
+
+        // ------- UI helpers -------
+
+        function showMessage(messageText) {
+            const messageContainer = document.querySelector("#payment-message");
+
+            messageContainer.classList.remove("hidden");
+            messageContainer.textContent = messageText;
+
+            setTimeout(function () {
+                messageContainer.classList.add("hidden");
+                messageText.textContent = "";
+            }, 4000);
+        }
+
+        // Show a spinner on payment submission
+        function setLoading(isLoading) {
+            if (isLoading) {
+                // Disable the button and show a spinner
+                document.querySelector("#submit").disabled = true;
+                document.querySelector("#spinner").classList.remove("hidden");
+                document.querySelector("#button-text").classList.add("hidden");
+            } else {
+                document.querySelector("#submit").disabled = false;
+                document.querySelector("#spinner").classList.add("hidden");
+                document.querySelector("#button-text").classList.remove("hidden");
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+    <section class="section-reservation">
+    <div class="parallax-effect4">
+        <div class="container">
+            <div class="row ">
+            <div class="col-sm-6 mt-5">
+                <div class="paiement">
+            <H2 class="H2-corps">Paiement sécurisé avec Stripe</H2>
+            {% for rubrique, messages in app.flashes %}
+                <div class="alert alert-{{ rubrique }}">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <form id="payment-form">
+                <div id="payment-element">
+                    <!--Stripe.js injects the Payment Element-->
+                </div>
+                <button id="submit" class="button2 btn btn-danger mt-3">
+                    <div class="spinner hidden" id="spinner"></div>
+                    <span id="button-text">Payer avec Stripe</span>
+                </button>
+                <div id="payment-message" class="hidden mt-3"></div>
+            </form>
+                </div>
+        </div>
+                <div class="col sm-6">
+                    <H1 class="H1-head wow animate__animated animate__lightSpeedInRight">
+                        Paiement sécurisé
+                    </H1>
+                    <H2 class="H2-corps">Cardoso VTC 34</H2>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    <section class="section5">
+        <div class="container">
+            <div class="titre">Cardoso VTC 34</div>
+            <h2  class="H2-corps">Témoignages clients</h2>
+            <div class="row mx-auto">
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div  class="name">Fred</div>
+                    <div class="comment">Professionnel</div>
+                    <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor esse expedita facere id libero modi perferendis rerum tenetur ullam! Adipisci eos excepturi fugiat id nemo, nostrum officiis reprehenderit voluptates?</p>
+                </div>
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div  class="name">Fred</div>
+                    <div class="comment">Professionnel</div>
+                    <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor esse expedita facere id libero modi perferendis rerum tenetur ullam! Adipisci eos excepturi fugiat id nemo, nostrum officiis reprehenderit voluptates?</p>
+                </div>
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div  class="name">Fred</div>
+                    <div class="comment">Professionnel</div>
+                    <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor esse expedita facere id libero modi perferendis rerum tenetur ullam! Adipisci eos excepturi fugiat id nemo, nostrum officiis reprehenderit voluptates?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Clients{% endblock %}
+
+{% block body %}
+    <h1>Editer Clients</h1>
+
+    {{ include('administrator/clients/_form.html.twig', {'button_label': 'Mise à jour'}) }}
+
+    <a class="btn btn-primary" href="{{ path('clients_index') }}">Retour à la liste</a>
+
+    {{ include('administrator/clients/_delete_form.html.twig') }}
+{% endblock %}

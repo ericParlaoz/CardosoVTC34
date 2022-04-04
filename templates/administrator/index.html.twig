@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}espace admin{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="border d-flex align-items-center justify-content-center" style="height: 700px;">
+        <div  class ="box card text-dark bg-light mb-3 rounded-30" style="max-width: 50rem">
+            <span><H1 class="title card-header text-center">Bienvenue Andy</H1></span>
+            <div class="card-body text-center">
+
+                <a class="bouton btn btn-primary" href="{{ path('clients_index') }}">Clients</a>
+                <a class="bouton btn btn-primary" href="{{ path('admin_course') }}">Mes Courses</a>
+                <a class="bouton btn btn-danger" href="/logout">Se déconnecter</a>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

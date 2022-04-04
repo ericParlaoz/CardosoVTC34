@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation VTC Frontignan{% endblock %}
+{% block meta_description %}Cardoso VTC votre chauffeur privée dur Frontignan{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/wow.min.js') }}"></script>
+    <script type="text/javascript">
+        new WOW().init();
+    </script>
+{% endblock %}
+
+{% block body %}
+    <section class="section-reservation">
+    <div class="parallax-effect3">
+        <div class="container">
+            <div class="row">
+                <div class="col form-fond wow animate__animated animate__zoomIn mt-5">
+                    {{ form_start(formulaireCourse) }}
+                    {% form_theme formulaireCourse 'bootstrap_5_layout.html.twig' %}
+                        <H2 class="H2-corps">Formulaire de réservation </H2>
+                        <div class="form-group form-text">
+                            {{ form_row(formulaireCourse.adresseDepart, {'attr': {'class': 'form-control','placeholder': 'Adresse, Ville, Pays...'}}) }}
+                        </div>
+                        <div class="form-group form-text">
+                            {{ form_row(formulaireCourse.adresseArrivee, {'attr': {'class': 'form-control','placeholder': "Adresse, Ville, Pays..."}}) }}
+                        </div>
+                        <div class="form-group form-text">
+                            {{ form_row(formulaireCourse.passagers, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez le nombre de passagers'}}) }}
+                        </div>
+                        <div class="form-group form-text">
+                            {{ form_row(formulaireCourse.date, {'attr': {'class': 'form-control'}}) }}
+                            <div class="form-group">
+                                <input type="submit" value="Calculer" class="button2 btn btn-danger">
+                            </div>
+                            <br>
+
+                            {% for label, messages in app.flashes %}
+                                {% for message in messages %}
+                                    <div class="flash-{{ label }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {{ form_end(formulaireCourse) }}
+                </div>
+                <div class="col ms-3">
+                    <div class="block-responsive">
+                    <H1 class="H1-head wow animate__animated animate__lightSpeedInRight">
+                        Réserver un VTC à Frontignan
+                    </H1>
+                    <H2 class="H2-corps">Cardoso VTC 34</H2>
+                    <div class="mt-3">
+                    <a href="{{ asset('#contact') }}" type="button" class="button btn btn-outline-light">Devis longue distance</a>
+                    <a href="tel:0624512297" type="button" class="button2 btn btn-danger ms-3">06 24 51 22 97</a>
+                        <img src="{{ asset('images/tesla.png') }}" class="img-fluid" alt="">
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </section>
+    <section class="section5">
+        <div class="container">
+            <div class="titre">Cardoso VTC 34</div>
+            <h2  class="H2-corps">Témoignages clients</h2>
+            <div class="row mx-auto">
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div  class="name">Fred</div>
+                    <div class="comment">Professionnel</div>
+                    <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor esse expedita facere id libero modi perferendis rerum tenetur ullam! Adipisci eos excepturi fugiat id nemo, nostrum officiis reprehenderit voluptates?</p>
+                </div>
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div  class="name">Fred</div>
+                    <div class="comment">Professionnel</div>
+                    <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor esse expedita facere id libero modi perferendis rerum tenetur ullam! Adipisci eos excepturi fugiat id nemo, nostrum officiis reprehenderit voluptates?</p>
+                </div>
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div  class="name">Fred</div>
+                    <div class="comment">Professionnel</div>
+                    <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor esse expedita facere id libero modi perferendis rerum tenetur ullam! Adipisci eos excepturi fugiat id nemo, nostrum officiis reprehenderit voluptates?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

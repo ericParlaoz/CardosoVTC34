@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommandeController!{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('message') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+    {{ form_start(formulaireCommande) }}
+    {% form_theme formulaireCommande 'bootstrap_5_layout.html.twig' %}
+    <div class="col-sm-6 container-sm mb-3 mt-3">
+        <div class="form-group">
+            {{ form_row(formulaireCommande.nom, {'attr': {'class': 'form-control','placeholder': 'Votre nom...'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formulaireCommande.prenom, {'attr': {'class': 'form-control','placeholder': 'Votre prénom...'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formulaireCommande.entreprise, {'attr': {'class': 'form-control','placeholder': 'Votre entreprise...'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formulaireCommande.rue, {'attr': {'class': 'form-control', 'placeholder': 'Votre rue...'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formulaireCommande.codepostal, {'attr': {'class': 'form-control', 'placeholder': 'Votre code postal...'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formulaireCommande.ville, {'attr': {'class': 'form-control','placeholder': 'Votre ville...'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formulaireCommande.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Votre téléphone...'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formulaireCommande.email, {'attr': {'class': 'form-control', 'placeholder': 'Votre email...'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formulaireCommande.infos, {'attr': {'class': 'form-control', 'placeholder': 'Étage, code portail, etc...'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formulaireCommande.confidentialite, {'attr': {'class': 'form-control', 'placeholder': 'Votre email...'}}) }}
+            J’autorise ce site à conserver mes données personnelles transmises via ce formulaire. Aucune exploitation
+            commerciale ne sera faite des données conservées. Voir notre politique de gestion des données personnelles
+            sur la page (Politique de confidentialité)
+        </div>
+        <br>
+
+        <div class="alert alert-dismissible alert-success">
+            <strong>Résumé de votre course</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            {% for course in resultat %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Adresse de départ</th>
+                        <th>Adresse d'arrivee</th>
+                        <th>Passagers</th>
+                        <th>Date de réservation</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for course in resultat %}
+                        <tr>
+                            <td>{{ course.adresseDepart }}</td>
+                            <td>{{ course.adresseArrivee }}</td>
+                            <td>{{ course.passagers }}</td>
+                            <td>{{ course.date ? course.date|date('d-m-Y H:i') : '' }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">Pas de résultat</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+            {# read and display all flash messages #}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Payer" class="btn btn-success">
+        </div>
+    </div>
+    {{ form_end(formulaireCommande) }}
+
+
+{% endblock %}

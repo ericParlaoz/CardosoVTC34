@@ -1,0 +1,328 @@
+body {
+    font-family: "montserrat", Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+.section1 {
+    background-color: #ffffff;
+}
+
+.section2 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #ffffff;
+}
+
+.section3 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #f2F2F2;
+}
+
+.section4 {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: #ffffff;
+}
+
+.section5 {
+    background-color: #f2F2F2;
+    padding-bottom: 30px;
+
+}
+
+.section7 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: rgb(150,28,28);
+    background: linear-gradient(347deg, rgba(150,28,28,1) 0%, rgba(223,64,79,1) 100%);
+    text-align: center;
+    color: #FFFFFF;
+}
+.logo {
+    width: 180px;
+}
+
+.H1-head {
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+    padding-top: 70px;
+    color: #ffffff;
+    font-weight: bold;
+
+}
+.H2-head {
+    font-family: "montserrat", Arial, Helvetica, sans-serif;
+    color: #ffffff;
+}
+
+.H2-corps {
+    font-family: "montserrat", Arial, Helvetica, sans-serif;
+    color: #dc3545;
+    font-weight: bold;
+}
+.LI-corps {
+    color: white;
+}
+.P-head {
+    color: #FFFFFF;
+}
+
+.button {
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.button2 {
+    border-radius: 20px;
+    color: white;
+    font-size: 18px;
+}
+.button2:hover {
+    color: white;
+
+}
+
+.button-head {
+    border-radius: 20px;
+    color: white;
+}
+.button-head:hover {
+    color: white;
+
+}
+
+.form-group {
+    color: white;
+}
+
+.button-align {
+    display: flex;
+}
+
+.card {
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+
+}
+
+
+.card2 {
+    background-color: transparent;
+    color: #FFFFFF;
+}
+.card2 {
+    background-color: transparent;
+    border-radius: 20px;
+    color: #FFFFFF;
+}
+
+.H2-cards {
+    font-family: "montserrat", Arial, Helvetica, sans-serif;
+    color: white;
+
+}
+
+.col {
+    padding-top: 30px;
+}
+
+
+.parallax-effect {
+    background-image: url('../images/bg-vtc-sete.jpg');
+    min-height: 600px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-effect2 {
+    background-image: url('../images/vtc-frontignan2.jpg');
+    min-height: 600px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.image-miniature {
+    width: 500px;
+    height: auto;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    border: 1px solid white;
+}
+
+.img-site {
+    max-width: 450px;
+}
+
+.textAnim {
+    transform: translateX(400px);
+    transition: transform 1s;
+    text-align: center;
+}
+
+.montpellier-img {
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    border: 1px solid white;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Temoignages */
+
+.titre {
+    padding-top: 20px;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.comment {
+    text-transform: uppercase;
+    color: #999999;
+    font-size: 20px;
+}
+
+.message {
+    width: 300px;
+}
+
+/* navbar */
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+/* reservation */
+
+.parallax-effect3 {
+    background-image: url('../images/bg-city.jpg');
+    min-height: 700px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-effect4 {
+    background-image: url('../images/bg-city.jpg');
+    min-height: 800px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.section-reservation {
+    padding-top: 80px;
+}
+
+
+
+.form-fond {
+    background-color: #FFFFFF;
+    opacity: 95%;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+.form-text {
+    color: black;
+    font-size: 16px;
+}
+
+.alert {
+    border-radius: 20px;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+
+}
+
+.paiement {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    opacity: 95%;
+    margin-top: 20px;
+}
+
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media screen and (max-width: 380px) {
+    .card {
+        width: 350px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .temoignage {
+        width: 350px;
+        margin-bottom: 20px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .card {
+        width: 300px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .temoignage {
+        width: 300px;
+        margin: auto;
+    }
+
+    .block-responsive {
+        width: 350px;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .card {
+        width: 300px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    .temoignage {
+        width: 300px;
+        margin-bottom: 20px;
+    }
+    .block-responsive {
+        width: 300px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+}
+
+@media only screen and (max-device-width: 1366px) {
+    .parallax-effect {
+        background-attachment: scroll;
+    }
+    .parallax-effect2 {
+        background-attachment: scroll;
+    }
+
+    .parallax-effect3 {
+        background-attachment: scroll;
+    }
+
+    .parallax-effect4 {
+        background-attachment: scroll;
+    }
+
+}
+

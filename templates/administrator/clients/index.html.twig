@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clients index{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+            <div class="container">
+            <div class="row-admin">
+
+            <H1 class="title card-header text-center">Liste des clients</H1>
+            <div class="card-body text-center">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Entreprise</th>
+                        <th>Rue</th>
+                        <th>Code postal</th>
+                        <th>Ville</th>
+                        <th>Télephone</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for client in clients %}
+                        <tr class="table-light">
+                            <td>{{ client.id }}</td>
+                            <td>{{ client.nom }}</td>
+                            <td>{{ client.prenom }}</td>
+                            <td>{{ client.entreprise }}</td>
+                            <td>{{ client.rue }}</td>
+                            <td>{{ client.codepostal }}</td>
+                            <td>{{ client.ville }}</td>
+                            <td>{{ client.telephone }}</td>
+                            <td>{{ client.email }}</td>
+                            <td>
+                                <a class="bouton btn btn-primary" href="{{ path('clients_show', {'id': client.id}) }}">Voir</a>
+                                <a class="bouton btn btn-success" href="{{ path('clients_edit', {'id': client.id}) }}">Éditer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10">Pas de résultat</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a class="bouton btn btn-success" href="{{ path('clients_new') }}">Nouveau</a>
+                <a class="bouton btn btn-primary" href="{{ path('admin') }}">Retour</a>
+            </div>
+            </div>
+            </div>
+
+{% endblock %}

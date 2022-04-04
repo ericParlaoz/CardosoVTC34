@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="index,follow">
+        <meta property="og:type" content="website" />
+
+        <meta name="description" content="{% block meta_description %}{% endblock %}">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+            <link rel="canonical" href="https://www.cardosovtc34.fr/" />
+            <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+            <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css') }}" integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
+            <link href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        {% endblock %}
+
+    </head>
+    <body>
+    {% block header %}<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <img class="ms-3 me-4 logo" src="{{ asset('images/logo-header.svg') }}" alt="">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ asset('#nosServices') }}">Nos services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ asset('#clients') }}">Avis clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ asset('#contact') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ asset('/reservation') }}" type="button" class="button-head btn btn-danger ms-3">Réserver votre course</a>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>{% endblock %}
+        {% block body %}
+
+        {% endblock %}
+    {% block footer %}
+        <!-- Footer -->
+        <footer class="text-center text-lg-start bg-light text-muted">
+            <!-- Section: Social media -->
+            <section
+                    class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+            >
+                <!-- Left -->
+                <div class="me-5 d-none d-lg-block">
+                    <span>Suivez-nous sur les réseaux sociaux</span>
+                </div>
+                <!-- Left -->
+
+                <!-- Right -->
+                <div>
+                    <a href="{{ asset('https://www.facebook.com/cardosovtc/') }}" target="_blank " class="me-4 text-reset">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+                <!-- Right -->
+            </section>
+            <!-- Section: Social media -->
+
+            <!-- Section: Links  -->
+            <section class="">
+                <div class="container text-center text-md-start mt-5">
+                    <!-- Grid row -->
+                    <div class="row mt-3">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <!-- Content -->
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Cardoso VTC 34
+                            </h6>
+                            <p>
+                                Votre chauffeur privé disponible sur Montpellier, Sète, Frontignan, Agde, Marseillan et dans l'Hérault (34)
+                            </p>
+                            <img class="ms-3 me-4 logo" src="{{ asset('images/logo-header.svg') }}" alt="">
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Réservez votre chauffeur privé
+                            </h6>
+                            <p>
+                                <a href="{{ asset('/reservation') }}" class="text-reset text-decoration-none">Chauffeur privé à Sete</a>
+                            </p>
+                            <p>
+                                <a href="{{ asset('/reservation') }}" class="text-reset text-decoration-none">Chauffeur privé à Frontignan</a>
+                            </p>
+                            <p>
+                                <a href="{{ asset('/reservation') }}" class="text-reset text-decoration-none">Chauffeur privé à Montpellier</a>
+                            </p>
+                            <p>
+                                <a href="{{ asset('/reservation') }}" class="text-reset text-decoration-none">Chauffeur privé à Agde</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Navigation
+                            </h6>
+                            <p>
+                                <a href="/" class="text-reset text-decoration-none">Accueil</a>
+                            </p>
+                            <p>
+                                <a href="{{ asset('#nosServices') }}" class="text-reset text-decoration-none">Nos services</a>
+                            </p>
+                            <p>
+                                <a href="{{ asset('/reservation') }}" class="text-reset text-decoration-none">Réservation en ligne</a>
+                            </p>
+                            <p>
+                                <a href="{{ asset('#contact') }}" class="text-reset text-decoration-none">Contact</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Contact
+                            </h6>
+                            <p><i class="fas fa-home me-3"></i> Montpellier et Frontignan</p>
+                            <p>
+                                <i class="fas fa-envelope me-3"></i>
+                                <a href="mailto:cardosovtc34@gmail.com " class="text-reset text-decoration-none">cardosovtc34@gmail.com</a>
+                            </p>
+                            <p>
+                                <i class="fas fa-phone me-3"></i>
+                                <a href="tel:0624512297 " class="text-reset text-decoration-none">06 24 51 22 97</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row -->
+                </div>
+            </section>
+            <!-- Section: Links  -->
+
+            <!-- Copyright -->
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                © 2022 Copyright: Cardoso VTC |
+                <a class="text-reset fw-bold" href="{{ asset('/mentions') }}">Mentions légales</a> -
+                <a class="text-reset fw-bold" href="{{ asset('/confidentialite') }}">Politique de confidentialité</a>
+                <br>
+                Conception
+                <a class="text-reset" href="https://www.eric-parlaoz.fr/" target="_blank">Eric PARLAOZ</a>
+                /
+                <a class="text-reset" href="{{ asset('/admin') }}" >Administration</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+    {% endblock %}
+    {% block javascripts %}
+        <script defer src="https://js.stripe.com/v3/"></script>
+        <script defer src="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script defer src="{{ asset('https://kit.fontawesome.com/eda674f759.js') }}" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/cookiechoices.js') }}"></script>
+        <script>document.addEventListener('DOMContentLoaded', function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’accepte', 'En savoir plus', '{{ asset('/confidentialite') }}');});
+        </script>
+    {% endblock %}
+    </body>
+</html>
