@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Course;
-use App\Form\Course1Type;
 use App\Form\CourseType;
 use App\Repository\CourseRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,17 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/administrator/course')]
+#[Route('/admin/course')]
 class CourseController extends AbstractController
 {
-    #[Route('/', name: 'course_index', methods: ['GET'])]
-    public function index(CourseRepository $courseRepository): Response
-    {
-        return $this->render('administrator/course/index.html.twig', [
-            'courses' => $courseRepository->findAll()
-        ]);
-    }
-
     #[Route('/new', name: 'course_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

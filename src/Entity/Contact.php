@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
@@ -83,12 +84,12 @@ class Contact
         return $this;
     }
 
-    public function getCheckbox(): ?string
+    public function getCheckbox(): ?bool
     {
         return $this->checkbox;
     }
 
-    public function setCheckbox(string $checkbox): self
+    public function setCheckbox(bool $checkbox): self
     {
         $this->checkbox = $checkbox;
 

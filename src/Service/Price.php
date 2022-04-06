@@ -7,17 +7,21 @@ use App\Form\CourseType;
 use App\Repository\CourseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class Price
 {
 
-    function prixCourse(CourseRepository $courseRepository, GetDistance $distance)
+    function prixCourse(SessionInterface $session, GetDistance $distance)
     {
-        $result = $courseRepository->findBy([], ['id' => 'DESC'], 1);
+        //$result = $courseRepository->findBy([], ['id' => 'DESC'], 1);
 
-        $adresse1 = $result[0]->getAdresseDepart() ;
-        $adresse2= $result[0]->getAdresseArrivee() ;
+        $adresse1 = $session->get('adresseDepart',[]);
+        $adresse2 = $session->get('adresseArrivee',[]);
+
+        //$adresse1 = $result[0]->getAdresseDepart() ;
+        //$adresse2= $result[0]->getAdresseArrivee() ;
 
 
         $kmTotal = $distance->apiCalcul($adresse1, $adresse2);
@@ -33,13 +37,15 @@ class Price
         return  $price;
     }
 
-    function distance(CourseRepository $courseRepository, GetDistance $distance)
+    function distance(SessionInterface $session, CourseRepository $courseRepository, GetDistance $distance)
     {
-        $result = $courseRepository->findBy([], ['id' => 'DESC'], 1);
+        //$result = $courseRepository->findBy([], ['id' => 'DESC'], 1);
 
-        $adresse1 = $result[0]->getAdresseDepart() ;
-        $adresse2= $result[0]->getAdresseArrivee() ;
+        //$adresse1 = $result[0]->getAdresseDepart() ;
+        //$adresse2= $result[0]->getAdresseArrivee() ;
 
+        $adresse1 = $session->get('adresseDepart',[]);
+        $adresse2 = $session->get('adresseArrivee',[]);
 
         $kmTotal = $distance->apiCalcul($adresse1, $adresse2);
 

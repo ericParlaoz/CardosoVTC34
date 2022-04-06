@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Clients;
 use App\Repository\ClientsRepository;
+use App\Repository\ContactRepository;
 use App\Repository\CourseRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -18,7 +19,6 @@ class DashboardController extends AbstractDashboardController
 
     {
             return $this->render('administrator/index.html.twig', [
-                'controller_name' => 'NosServicesController',
             ]);
     }
 

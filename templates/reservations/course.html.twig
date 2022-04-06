@@ -22,7 +22,7 @@
         <div class="parallax-effect4">
         <div class="container">
             <div class="row">
-                <div class="col mt-5">
+                <div class="col ">
                     {% for rubrique, messages in app.flashes %}
                         <div class="alert alert-{{ rubrique }}">
                             <h2>Informations de la course</h2>
@@ -33,7 +33,7 @@
                     {% endfor %}
 
                 </div>
-                <div class="col mt-5 mb-5">
+                <div class="col ">
                     {{ form_start(formulaireCommande) }}
                     {% form_theme formulaireCommande 'bootstrap_5_layout.html.twig' %}
                     <div class="col form-fond wow animate__animated animate__zoomIn">
