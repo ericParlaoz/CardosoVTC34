@@ -20,14 +20,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReservationsController extends AbstractController
 {
     #[Route('/', name: 'reservation')]
-    public function newCourseBDD(Request $request, GetDistance $distance, RequestStack $requestStack)
+    public function newCourseBDD(Request $request, GetDistance $distance)
     {
 
         // Création de mon formulaire
         $form = $this->createForm(CourseType::class);
         // Hydratation de mon formulaire
         $form->handleRequest($request);
-
 
         // Si le formulaire et soumis et valide :
         if ($form->isSubmitted() && $form->isValid()) {
@@ -39,42 +38,32 @@ class ReservationsController extends AbstractController
             $passagers = $data->getPassagers();
             $date = $data->getDate();
 
-        // je crée ici la session
-        $session = $request->getSession();
+            // je crée ici la session
+            $session = $request->getSession();
 
-        $session->get('adresseDepart',[]);
-        $session->set('adresseDepart', $adress_1);
-        $session->get('adresseArrivee',[]);
-        $session->set('adresseArrivee', $adress_2);
-        $session->get('passagers',[]);
-        $session->set('passagers', $passagers);
-        $session->get('date',[]);
-        $session->set('date', $date);
+            $session->get('adresseDepart',[]);
+            $session->set('adresseDepart', $adress_1);
+            $session->get('adresseArrivee',[]);
+            $session->set('adresseArrivee', $adress_2);
+            $session->get('passagers',[]);
+            $session->set('passagers', $passagers);
+            $session->get('date',[]);
+            $session->set('date', $date);
 
 
-            // Je stock le prix du calcul de la course dans une variable
-            $price = ((int)$distance->apiCalcul($adress_1, $adress_2) * 2);
-            // Je stock le prix la distance brut de la course dans une variable
-            $kmTotal = $distance->apiCalcul($adress_1, $adress_2);
-            // j'arondie la distance et la stock dans une autre variable
-            $kmArrondie = floor($kmTotal);
+            $kmTotal = $distance->apiCalculDistance($adress_1, $adress_2);
 
-            // Je fait une condition qui affiche 20€ pour toute commande inferieur à 20€
-            if($price < 20){
-                $price = 20;
-            }
-
+            // Mes conditions
             if ($kmTotal === 0 || $adress_1 === false || $adress_2 === false )  {
                 // Message d'erreur si une des conditions est remplie
                 $this->addFlash('error', "Erreur: Veillez renseigner par des adresses valides !");
 
             }
-            else if ( $kmArrondie > 800 ) {
+            else if ( $kmTotal > 800 ) {
                 // Message d'erreur si une des conditions est remplie
                 $this->addFlash('error', "Erreur: Grande distance sur devis");
             }
             else {
-
 
                 return $this->redirectToRoute('reservation2');
             }
@@ -97,10 +86,15 @@ class ReservationsController extends AbstractController
         $dateConvertion = date_format($date, "d/m/Y/H:i");
 
         // Je stock le prix du calcul de la course dans une variable
-        $price = ((int)$distance->apiCalcul($adress_1, $adress_2) * 2);
+        $price = ((int)$distance->apiCalculDistance($adress_1, $adress_2) * 2);
+
+        // Je fait une condition qui affiche 20€ pour toute commande inferieur à 20€
+        if($price < 20){
+            $price = 20;
+        }
 
         // Je stock le prix la distance brut de la course dans une variable
-        $kmTotal = $distance->apiCalcul($adress_1, $adress_2);
+        $kmTotal = $distance->apiCalculDistance($adress_1, $adress_2);
         // j'arondie la distance et la stock dans une autre variable
         $kmArrondie = floor($kmTotal);
 
@@ -131,7 +125,6 @@ class ReservationsController extends AbstractController
             'formulaireCommande' => $form->createView(),
         ]);
     }
-
 
 }
 
