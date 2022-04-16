@@ -52,6 +52,7 @@ class ReservationsController extends AbstractController
 
 
             $kmTotal = $distance->apiCalculDistance($adress_1, $adress_2);
+            $kmDepart = $distance->depart($adress_1);
 
             // Mes conditions
             if ($kmTotal === 0 || $adress_1 === false || $adress_2 === false )  {
@@ -59,10 +60,15 @@ class ReservationsController extends AbstractController
                 $this->addFlash('error', "Erreur: Veillez renseigner par des adresses valides !");
 
             }
-            else if ( $kmTotal > 800 ) {
+            else if ( $kmTotal > 800  ) {
                 // Message d'erreur si une des conditions est remplie
                 $this->addFlash('error', "Erreur: Grande distance sur devis");
             }
+            else if ( $kmDepart > 500  ) {
+                // Message d'erreur si une des conditions est remplie
+                $this->addFlash('error', "Erreur: Ville de départ trop éloigné");
+            }
+
             else {
 
                 return $this->redirectToRoute('reservation2');
@@ -85,12 +91,20 @@ class ReservationsController extends AbstractController
 
         $dateConvertion = date_format($date, "d/m/Y/H:i");
 
+
+        $distanceBrut = $distance->apiCalculDistance($adress_1, $adress_2);
+        $distanceDepart = $distance->depart($adress_1);
+
+
         // Je stock le prix du calcul de la course dans une variable
-        $price = ((int)$distance->apiCalculDistance($adress_1, $adress_2) * 2);
+        $price = ($distanceBrut + $distanceDepart) *1.2;
+        $priceArrondie = floor($price);
+        //dd($price);
+
 
         // Je fait une condition qui affiche 20€ pour toute commande inferieur à 20€
-        if($price < 20){
-            $price = 20;
+        if($priceArrondie < 20){
+            $priceArrondie = 20;
         }
 
         // Je stock le prix la distance brut de la course dans une variable
@@ -101,11 +115,12 @@ class ReservationsController extends AbstractController
         $flashBag->add('success',"Date: $dateConvertion");
         $flashBag->add('success',"Adresse de départ: $adress_1");
         $flashBag->add('success',"Adresse d'arrivée: $adress_2");
-        $flashBag->add('success',"Prix: $price €");
+        $flashBag->add('success',"Prix: $priceArrondie €");
         $flashBag->add('success',"Distance: $kmArrondie Km");
 
 
         $client = new Clients();
+
         // Création de mon formulaire
         $form = $this->createForm(CommandeType::class, $client);
         // Hydratation de mon formulaire

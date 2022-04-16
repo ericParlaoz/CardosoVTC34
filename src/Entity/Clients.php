@@ -43,6 +43,15 @@ class Clients
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $infos;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $adresse_depart;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $adresse_arrivee;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $date;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,6 +173,42 @@ class Clients
     public function setInfos(?string $infos): self
     {
         $this->infos = $infos;
+
+        return $this;
+    }
+
+    public function getAdresseDepart(): ?string
+    {
+        return $this->adresse_depart;
+    }
+
+    public function setAdresseDepart(?string $adresse_depart): self
+    {
+        $this->adresse_depart = $adresse_depart;
+
+        return $this;
+    }
+
+    public function getAdresseArrivee(): ?string
+    {
+        return $this->adresse_arrivee;
+    }
+
+    public function setAdresseArrivee(?string $adresse_arrivee): self
+    {
+        $this->adresse_arrivee = $adresse_arrivee;
+
+        return $this;
+    }
+
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(?string $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }
