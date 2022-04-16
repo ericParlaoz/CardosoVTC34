@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -46,12 +47,8 @@ class CourseType extends AbstractType
                     ])
                 ]
             ])
-            ->add('passagers', IntegerType::class, [
+            ->add('passagers', NumberType::class, [
                 'required' => true,
-                'attr' => [
-                    'min'=>1,
-                    'max' =>5,
-                ],
                 'label' => "Nombre de passagers",
                 'constraints' => [
                     new NotBlank([
@@ -60,7 +57,7 @@ class CourseType extends AbstractType
                     new Assert\Range([
                         'min' => 1,
                         'max' => 5,
-                        'notInRangeMessage' => "Le nombre de passager doit être compris entre 1 et 5 !",
+                        'notInRangeMessage' => "Le nombre de passagers doit être compris entre 1 et 5 !",
                     ]),
                 ]
             ])
@@ -72,8 +69,7 @@ class CourseType extends AbstractType
               //  'format' => 'dd/MM/yyyy',
                 'label' => "Date de réservation",
                 'constraints' => [
-                    new Assert\GreaterThan("+1 hours", message: "Veillez sélectionner une date supérieure !")
-
+                    new Assert\GreaterThan("+2 hours", message: "Veillez sélectionner une date supérieure de 30 minutes de plus !")
                 ]
             ]);
     }

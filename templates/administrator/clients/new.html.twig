@@ -3,40 +3,47 @@
 {% block title %}New Clients{% endblock %}
 
 {% block body %}
-    <h1>Créer nouveaux clients</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Créer nouveaux clients</h1>
 
-    {{ form_start(formulaireClient) }}
-    {% form_theme formulaireClient 'bootstrap_5_layout.html.twig' %}
-    <div class="col-sm-6">
-        <div class="form-group">
-            {{ form_row(formulaireClient.nom, {'attr': {'class': 'form-control','placeholder': 'Votre nom...'}}) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(formulaireClient.prenom, {'attr': {'class': 'form-control','placeholder': 'Votre prénom...'}}) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(formulaireClient.entreprise, {'attr': {'class': 'form-control','placeholder': 'Votre entreprise...'}}) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(formulaireClient.rue, {'attr': {'class': 'form-control', 'placeholder': 'Votre rue...'}}) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(formulaireClient.codepostal, {'attr': {'class': 'form-control', 'placeholder': 'Votre code postal...'}}) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(formulaireClient.ville, {'attr': {'class': 'form-control','placeholder': 'Votre ville...'}}) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(formulaireClient.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Votre téléphone...'}}) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(formulaireClient.email, {'attr': {'class': 'form-control', 'placeholder': 'Votre email...'}}) }}
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Envoyer" class="btn btn-success">
+                {{ form_start(formulaireClient) }}
+                {% form_theme formulaireClient 'bootstrap_5_layout.html.twig' %}
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        {{ form_row(formulaireClient.nom, {'attr': {'class': 'form-control','placeholder': 'Votre nom...'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formulaireClient.prenom, {'attr': {'class': 'form-control','placeholder': 'Votre prénom...'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formulaireClient.entreprise, {'attr': {'class': 'form-control','placeholder': 'Votre entreprise...'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formulaireClient.rue, {'attr': {'class': 'form-control', 'placeholder': 'Votre rue...'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formulaireClient.codepostal, {'attr': {'class': 'form-control', 'placeholder': 'Votre code postal...'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formulaireClient.ville, {'attr': {'class': 'form-control','placeholder': 'Votre ville...'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formulaireClient.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Votre téléphone...'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formulaireClient.email, {'attr': {'class': 'form-control', 'placeholder': 'Votre email...'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Envoyer" class="btn btn-success">
+                    </div>
+                </div>
+                {{ form_end(formulaireClient) }}
+
+                <a class="btn btn-primary" href="{{ path('clients_index') }}">Retour à la liste</a>
+            </div>
         </div>
     </div>
-    {{ form_end(formulaireClient) }}
 
-    <a class="btn btn-primary" href="{{ path('clients_index') }}">Retour à la liste</a>
 {% endblock %}

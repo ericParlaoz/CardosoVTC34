@@ -1,5 +1,6 @@
 body {
-    font-family: "Lato", Arial, Helvetica, sans-serif;
+    font-family: "montserrat", Arial, Helvetica, sans-serif;
+    font-size: 15px;
     text-align: center;
     /* On peut définir un fond en couleurs dégradées à l'aide de la fonction css linear-gradient qui peut prendre différentes couleurs et les disposer en interpolant entre chaque pour créer un effet de dégradé*/
     /* On peut orienter le dégradé en spécifiant une orientation sous la forme d'un angle en degrés */

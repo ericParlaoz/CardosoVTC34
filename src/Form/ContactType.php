@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Contact;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -41,12 +42,16 @@ class ContactType extends AbstractType
                     ])
                 ]
             ])
-            ->add('telephone',TextType::class, [
+            ->add('telephone', NumberType::class, [
                 'required' => true,
-                'label' => "Votre téléphone",
+                'label' => "Téléphone",
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez saisir votre numéro de téléphone'
+                        'message' => 'Veuillez saisir votre téléphone'
+                    ]) ,
+                    new Length([
+                        'min' => 10,
+                        'max'=>11,
                     ])
                 ]
             ])

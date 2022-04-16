@@ -9,6 +9,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -52,7 +54,7 @@ class CommandeType extends AbstractType
                     ])
                 ]
             ])
-            ->add('codepostal', TextType::class, [
+            ->add('codepostal', NumberType::class, [
                 'required' => true,
                 'label' => "Code postal",
                 'constraints' => [
@@ -74,13 +76,18 @@ class CommandeType extends AbstractType
                     ])
                 ]
             ])
-            ->add('telephone', TextType::class, [
+            ->add('telephone', NumberType::class, [
                 'required' => true,
                 'label' => "Téléphone",
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez saisir votre téléphone'
+                    ]) ,
+                    new Length([
+                        'min' => 10,
+                        'max'=>11,
                     ])
+
                 ]
             ])
             ->add('email', EmailType::class, [

@@ -1,9 +1,0 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello SessionController!{% endblock %}
-
-{% block body %}
-   {{ dump(app.session.getBag('flashes')) }}
-    <a href="{{ path('add', {'id': course}) }}"  value="Calculer" class="btn btn-primary">Envoyer</a>
-{% endblock %}
-
