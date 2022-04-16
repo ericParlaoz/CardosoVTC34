@@ -91,12 +91,13 @@ class ReservationsController extends AbstractController
 
         $dateConvertion = date_format($date, "d/m/Y/H:i");
 
-
+        // Calcul de la distance du départ à l'arrivée
         $distanceBrut = $distance->apiCalculDistance($adress_1, $adress_2);
+        // Calcul de la distance de la ville du siège (Frontignan) à l'adresse de départ de la course
         $distanceDepart = $distance->depart($adress_1);
 
 
-        // Je stock le prix du calcul de la course dans une variable
+        // J'additionne mes deux valeurs'
         $price = ($distanceBrut + $distanceDepart) *1.2;
         $priceArrondie = floor($price);
         //dd($price);
@@ -109,7 +110,7 @@ class ReservationsController extends AbstractController
 
         // Je stock le prix la distance brut de la course dans une variable
         $kmTotal = $distance->apiCalculDistance($adress_1, $adress_2);
-        // j'arondie la distance et la stock dans une autre variable
+        // j'arrondie la distance et la stock dans une autre variable
         $kmArrondie = floor($kmTotal);
 
         $flashBag->add('success',"Date: $dateConvertion");
@@ -132,7 +133,7 @@ class ReservationsController extends AbstractController
             $entityManager->flush();
 
 
-            // Redirection sur la page de paiement
+            // Redirection sur la page de paiement et génération d'un ID
             return $this->redirectToRoute('checkout', ['id' => $client->getId()], Response::HTTP_SEE_OTHER);
         }
 
