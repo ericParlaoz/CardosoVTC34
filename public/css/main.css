@@ -2,6 +2,10 @@ body {
     font-family: "montserrat", Arial, Helvetica, sans-serif;
     font-size: 15px;
 }
+
+.container {
+    max-width: 1080px;
+}
 .section1 {
     background-color: #ffffff;
 }
@@ -44,6 +48,14 @@ body {
    padding-bottom: 100px;
 }
 
+.section-informations {
+    background-color: #dc3545;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+
+
 .card-admin {
     background: #f2F2F2F2;
     border-radius: 20px;
@@ -69,11 +81,25 @@ body {
     color: #ffffff;
 }
 
+.H2-titre-blanc {
+    font-family: "montserrat", Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 .H2-corps {
     font-family: "montserrat", Arial, Helvetica, sans-serif;
     color: #dc3545;
     font-weight: bold;
 }
+
+.H3-corps-blanc {
+    font-family: "montserrat", Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
 .LI-corps {
     color: white;
 }
@@ -168,6 +194,7 @@ body {
 
 .img-site {
     max-width: 450px;
+    border-radius: 20px;
 }
 
 .textAnim {
@@ -275,49 +302,35 @@ body {
 
 /* Responsive layout - makes a one column layout instead of a two-column layout */
 @media screen and (max-width: 380px) {
-    .card {
+    .card,
+    .img-site,
+    .block-responsive,
+    .temoignage{
         width: 350px;
         margin: auto;
         margin-bottom: 20px;
     }
 
-    .temoignage {
-        width: 350px;
-        margin-bottom: 20px;
-    }
 
 }
 
-@media screen and (max-width: 500px) {
-    .card {
-        width: 300px;
-        margin: auto;
-        margin-bottom: 20px;
-    }
-
-    .temoignage {
-        width: 300px;
-        margin: auto;
-    }
-
-    .block-responsive {
+@media screen and (max-width: 450px) {
+    .card,
+    .img-site,
+    .block-responsive,
+    .temoignage{
         width: 350px;
         margin: auto;
+        margin-bottom: 20px;
     }
 }
 
-@media screen and (max-width: 850px) {
-    .card {
-        width: 300px;
-        margin: auto;
-        margin-bottom: 20px;
-    }
-    .temoignage {
-        width: 300px;
-        margin-bottom: 20px;
-    }
-    .block-responsive {
-        width: 300px;
+@media screen and (max-width: 800px) {
+    .card,
+    .img-site,
+    .block-responsive,
+    .temoignage{
+        width: 350px;
         margin: auto;
         margin-bottom: 20px;
     }

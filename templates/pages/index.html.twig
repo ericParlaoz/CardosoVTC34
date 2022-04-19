@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Chauffeur privée sur Frontignan, Sète | Cardoso VTC 34{% endblock %}
-{% block meta_description %}VTC Frontignan - Cardoso VTC, Réservez votre VTC au meilleur prix{% endblock %}
+{% block title %}Chauffeur vtc Frontignan et Montpellier | Cardoso VTC 34{% endblock %}
+{% block meta_description %}Réserver, contacter & commander votre chauffeur VTC à Frontignan / Montpellier pour tout trajet : toutes distances à la demande, Aéroport et Gare{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css') }}">
 {% endblock %}
 
 {% block javascripts %}
@@ -18,7 +19,9 @@
 {% endblock %}
 
 {% block body %}
-    {{ parent() }}
+
+
+
     <section class="section1">
         <div class="parallax-effect text-center">
             <div class="container col-sm-6">
@@ -30,8 +33,10 @@
                             relative au transport de personnes et disposons de toutes les autorisations et assurances
                             nécessaires afin de vous garantir un niveau optimal de sécurité et de qualité.</p>
                         <div class="text-center mb-3">
-                            <a href="{{ asset('/reservation') }}" type="button" class="button btn btn-outline-light">Réserver une course</a>
-                            <a href="tel:0624512297" type="button" class="button2 btn btn-danger ms-3">06 24 51 22 97</a>
+                            <a href="{{ path('reservation') }}" type="button" class="button btn btn-outline-light">Réserver
+                                une course</a>
+                            <a href="tel:0624512297" type="button" class="button2 btn btn-danger ms-3">06 24 51 22
+                                97</a>
                         </div>
                     </div>
                 </div>
@@ -45,14 +50,16 @@
                     <img class="img-site mx-auto" src="{{ asset('images/chauffeur-privee-sete.png') }}" alt="">
                 </div>
                 <div class="col">
-                    <h2 class="H2-corps wow animate__animated animate__backInRight mt-5">Cardoso VTC votre chauffeur privé de l'agglomération de
-                            Montpellier, Sete et Frontignan</h2>
+                    <h2 class="H2-corps wow animate__animated animate__backInRight mt-5">Cardoso VTC votre chauffeur
+                        privé de l'agglomération de
+                        Montpellier, Sete et Frontignan</h2>
                     <p>Vous apporte un service haut-de-gamme pour vos déplacements. Que ce soit pour un transfert vers
                         et depuis l'aéroport de Montpellier, une petite ou une grande course, une mise à disposition, un
                         circuit touristique ou du shopping, votre chauffeur privé vous fera profiter de tout son
                         savoir-faire et son professionnalisme à bord d'un véhicule confortable et équipé de tout ce dont
                         vous avez besoin pour un trajet le plus agréable possible.</p>
-                    <a type="button" class="button2 btn btn-danger mb-5" href="{{ asset('/reservation') }}">Réserver une course</a>
+                    <a type="button" class="button2 btn btn-danger mb-5" href="{{ path('reservation') }}">Réserver une
+                        course</a>
                 </div>
             </div>
         </div>
@@ -60,34 +67,36 @@
     <section class="section3">
         <div class="container col-sm-9">
             <div class="row ">
-                <img class="montpellier-img card wow animate__animated animate__zoomIn mt-5 " src="{{ asset('images/montpellier.jpg') }}"
+                <img class="montpellier-img card wow animate__animated animate__zoomIn mt-5 "
+                     src="{{ asset('images/montpellier.jpg') }}"
                      alt="Chauffeur vtc Montpellier">
                 <div class="col mt-5">
                     <div class="block-responsive">
-                    <h2 class="H2-corps">Cardoso VTC <strong>Particuliers</strong></h2>
-                    <ul>
-                        <li>La facilité de réservation</li>
-                        <li>Le professionnalisme du chauffeur</li>
-                        <li>Le confort du véhicule</li>
-                        <li>Le tarif le plus juste</li>
-                    </ul>
+                        <h2 class="H2-corps">Cardoso VTC <strong>Particuliers</strong></h2>
+                        <ul>
+                            <li>La facilité de réservation</li>
+                            <li>Le professionnalisme du chauffeur</li>
+                            <li>Le confort du véhicule</li>
+                            <li>Le tarif le plus juste</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col mt-5">
                     <div class="block-responsive">
-                    <h2 class="H2-corps">Cardoso VTC <strong>Professionnels</strong></h2>
-                    <ul>
-                        <li>Un service d'une qualité irréprochable</li>
-                        <li>La garantie d'un prix adapté et transparent</li>
-                        <li>Une facturation globale, mensualisée</li>
-                        <li>Économisez 40% sur vos transports</li>
-                    </ul>
+                        <h2 class="H2-corps">Cardoso VTC <strong>Professionnels</strong></h2>
+                        <ul>
+                            <li>Un service d'une qualité irréprochable</li>
+                            <li>La garantie d'un prix adapté et transparent</li>
+                            <li>Une facturation globale, mensualisée</li>
+                            <li>Économisez 40% sur vos transports</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col text-center mt-3">
-            <a type="button" class="button2 btn btn-danger wow animate__animated animate__zoomIn mb-5" href="{{ asset('/reservation') }}">Réserver une course</a>
+            <a type="button" class="button2 btn btn-danger wow animate__animated animate__zoomIn mb-5"
+               href="{{ path('reservation') }}">Réserver une course</a>
         </div>
     </section>
     <section class="section4">
@@ -118,7 +127,7 @@
                                 qui ont lieu dans votre ville et vous désirez malgré tout y aller.
                                 Le chauffeur privé est la solution à tous vos cracas, notre équipe sera disponible à
                                 tous les impératifs. Nous vous déposerons au lieu voulu ainsi que nous viendrons vous
-                                chercher lorsque vous le désirez afin de passer un moment inoubliable.</p>
+                                chercher lorsque vous le désirez.</p>
                         </div>
                     </div>
                 </div>
@@ -127,68 +136,87 @@
                         <img class="card-img-top" src="{{ asset('images/pro2.png') }}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">Les trajets professionnels</h5>
-                            <p class="card-text">Remplacez votre abonnement taxi et Économisez 40% sur vos transports. Un avion à prendre, une dépose à la gare ou encore un séminaire organisé.
+                            <p class="card-text">Remplacez votre abonnement taxi et Économisez 40% sur vos transports.
+                                Un avion à prendre, une dépose à la gare ou encore un séminaire organisé.
 
-                                Vos réservations : en immédiat, à l'avance ou en mise à disposition, Cardoso vtc accompagne vos collaborateurs professionnels lors de tous déplacements.</p>
+                                Vos réservations : en immédiat, à l'avance ou en mise à disposition, Cardoso vtc
+                                accompagne vos collaborateurs professionnels lors de tous déplacements.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col mt-3">
-                    <div class="card wow animate__animated animate__zoomIn" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ asset('images/trajet.png') }}" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Les trajets divers </h5>
-                            <p class="card-text">Votre chauffeur privé accordera autant d'importance et de soin à la "petite course" que vous lui demandez qu'à un voyage de 200 km. Cela fait partie de son quotidien. N'hésitez donc pas à solliciter Cardoso VTC pour vos besoins de déplacement, même courts. Votre voiture sera à votre porte dans les minutes qui suivent votre appel téléphonique.
-
-                                Quand ce trajet doit être effectué de manière régulière, vous avez également la possibilité de souscrire un abonnement. </p>
-                        </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-informations" id="informations">
+        <div class="container">
+            <h2 class="H2-titre-blanc text-center">Plus d'informations pour réserver un VTC à Frontignan</h2>
+            <div class="row align-items-center mt-5">
+                <div class="col">
+                    <div class="block-responsive">
+                        <H3 class="H3-corps-blanc">Connaître le tarif d'un VTC Frontignan immédiatement</H3>
+                        <p class="P-head">Connaitre le prix d’un VTC avant de réserver est important. Naturellement nous avons décidé de mettre à votre disposition un système de réservation en ligne. Vous pourrez ainsi estimer le coût de votre course en indiquant des critères précis. Pour les courses longues distances, les évènements particuliers:  mariage,tourisme etc...., nous vous invitons à nous faire part de votre projet afin de vous fournir un devis détaillé.</p>
                     </div>
                 </div>
+                <div class="col text-center">
+                    <img class="img-site wow animate__animated animate__zoomIn" src="{{ asset('images/vtc-sete.jpg') }}" alt="">
+                </div>
+            </div>
+            <div class="row align-items-center mt-5">
+                <div class="col text-center">
+                    <img class="img-site wow animate__animated animate__zoomIn" src="{{ asset('images/chauffeur-privee-frontignan.jpg') }}" alt="">
+                </div>
+                <div class="col">
+                    <div class="block-responsive">
+                        <H3 class="H3-corps-blanc">
+                            Réserver VTC Frontignan en ligne ou par téléphone
+                        </H3>
+                        <p class="P-head">Réserver un VTC à l’avance s’avère nécessaire. Surtout si vous comptez partir à l’heure de pointe à Montepllier, Sète ou dans l'Hérault. Si vous prévoyez un trajet à Frontignan, nous vous conseillons d’effectuer votre réservation directement en ligne ou par téléphone. Nos chauffeurs privés à Frontignan se tiennent à votre disposition 7j/7, 24h/24.</p>
+                    </div></div>
             </div>
         </div>
     </section>
     <section class="section5" id="clients">
-    <div class="container">
-        <div class="titre">Cardoso VTC 34</div>
-        <h2  class="H2-corps">Témoignages clients</h2>
-        <div class="row mx-auto">
-            <div class="col wow animate__animated animate__zoomIn">
-                <div class="temoignage mx-auto">
-                <div  class="name">Fred</div>
-                <div class="comment">Professionnel</div>
-                <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor esse expedita facere id libero modi perferendis rerum tenetur ullam! Adipisci eos excepturi fugiat id nemo, nostrum officiis reprehenderit voluptates?</p>
+        <div class="container">
+            <div class="titre">Cardoso VTC 34</div>
+            <h2 class="H2-corps">Témoignages clients</h2>
+            <div class="row mx-auto">
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div class="temoignage mx-auto">
+                        <div class="name">Fred</div>
+                        <div class="comment">Professionnel</div>
+                        <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                        <p>La relation entretenue depuis 2019 s’appuie sur la qualité du service, la ponctualité, la gestion des imprévus, les véhicules utilisés et par ailleurs des échanges fluides.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col wow animate__animated animate__zoomIn">
-                <div class="temoignage mx-auto">
-                    <div  class="name">Fred</div>
-                    <div class="comment">Professionnel</div>
-                    <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor esse expedita facere id libero modi perferendis rerum tenetur ullam! Adipisci eos excepturi fugiat id nemo, nostrum officiis reprehenderit voluptates?</p>
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div class="temoignage mx-auto">
+                        <div class="name">Alice</div>
+                        <div class="comment">EFFICACE</div>
+                        <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                        <p>Cardoso VTC prend en charge nos touristes depuis plusieurs années : français ou internationaux sont toujours étonnés de leur sens du service, de leur gentillesse et de leurs bonnes adresses.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col wow animate__animated animate__zoomIn">
-                <div class="temoignage mx-auto">
-                    <div  class="name">Fred</div>
-                    <div class="comment">Professionnel</div>
-                    <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor esse expedita facere id libero modi perferendis rerum tenetur ullam! Adipisci eos excepturi fugiat id nemo, nostrum officiis reprehenderit voluptates?</p>
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div class="temoignage mx-auto">
+                        <div class="name">Eric</div>
+                        <div class="comment">PONCTUEL</div>
+                        <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                        <p>Chauffeur discret, cordial, très aimable et ponctuel...Conduite agréable, dans un véhicule confortable, propre et spacieux... Je recommande vivement.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </section>
     <section class="section6" id="contact">
         <div class="parallax-effect2">
             <br>
-            <h2 class="H2-corps text-center mt-3">Formulaire de contact</h2>
+            <h2 class="H2-titre-blanc text-center mt-3">Formulaire de contact</h2>
             <div class="container col-sm-12">
                 {% for message in app.flashes('success') %}
-                    <div class="message text-center mx-auto">
+                <div class="message text-center mx-auto">
                     <p class=" alert alert-success">{{ message }}</p>
-                {% endfor %}
-                    </div>
+                    {% endfor %}
+                </div>
                 {{ form_start(form) }}
                 <div class="bulle row block-responsive">
                     {% form_theme form 'bootstrap_5_layout.html.twig' %}
@@ -206,7 +234,10 @@
                             {{ form_row(form.message, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         <div class="form-group">
-                            {{ form_row(form.checkbox) }} J’autorise ce site à conserver mes données personnelles transmises via ce formulaire. Aucune exploitation commerciale ne sera faite des données conservées. Voir notre politique de gestion des données personnelles sur la page (Politique de confidentialité)
+                            {{ form_row(form.checkbox) }} J’autorise ce site à conserver mes données personnelles
+                            transmises via ce formulaire. Aucune exploitation commerciale ne sera faite des données
+                            conservées. Voir notre politique de gestion des données personnelles sur la page (Politique
+                            de confidentialité)
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Envoyer" class="button2 btn btn-danger mt-3 mb-3">
@@ -218,6 +249,7 @@
         </div>
     </section>
     <section class="section7">
-        <h3 class="wow animate__animated animate__lightSpeedInRight"><strong>Besoin d’un chauffeur privé ? Contactez nous 24h/7j au 06 24 51 22 97</strong></h3>
+        <h3 class="wow animate__animated animate__lightSpeedInRight"><strong>Besoin d’un chauffeur privé ? Contactez
+                nous 24h/7j au 06 24 51 22 97</strong></h3>
     </section>
 {% endblock %}

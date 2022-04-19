@@ -93,12 +93,11 @@ class ReservationsController extends AbstractController
 
         // Calcul de la distance du départ à l'arrivée
         $distanceBrut = $distance->apiCalculDistance($adress_1, $adress_2);
-        // Calcul de la distance de la ville du siège (Frontignan) à l'adresse de départ de la course
-        $distanceDepart = $distance->depart($adress_1);
+
 
 
         // J'additionne mes deux valeurs'
-        $price = ($distanceBrut + $distanceDepart) *1.2;
+        $price = ($distanceBrut * 2);
         $priceArrondie = floor($price);
         //dd($price);
 

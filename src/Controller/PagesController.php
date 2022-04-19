@@ -50,13 +50,13 @@ class PagesController extends AbstractController
         ]);
     }
 
-    #[Route('/mentions', name: 'Mentions_légales')]
+    #[Route('/mentions', name: 'mentions')]
     public function mentions(): Response
     {
         return $this->render('pages/mentions.html.twig');
     }
 
-    #[Route('confidentialite', name: 'confidentilaite')]
+    #[Route('confidentialite', name: 'confidentialite')]
     public function confidentialite(): Response
     {
         return $this->render('pages/confidentialite.html.twig');
