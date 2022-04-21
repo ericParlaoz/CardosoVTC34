@@ -143,11 +143,12 @@ body {
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
 
 }
+.card-infos {
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
 
-
-.card2 {
-    background-color: transparent;
-    color: #FFFFFF;
 }
 .card2 {
     background-color: transparent;
@@ -303,6 +304,7 @@ body {
 /* Responsive layout - makes a one column layout instead of a two-column layout */
 @media screen and (max-width: 380px) {
     .card,
+    .card-infos,
     .img-site,
     .block-responsive,
     .temoignage{
@@ -316,6 +318,7 @@ body {
 
 @media screen and (max-width: 450px) {
     .card,
+    .card-infos,
     .img-site,
     .block-responsive,
     .temoignage{
@@ -327,6 +330,7 @@ body {
 
 @media screen and (max-width: 800px) {
     .card,
+    .card-infos,
     .img-site,
     .block-responsive,
     .temoignage{

@@ -33,6 +33,7 @@ class ReservationsController extends AbstractController
 
             // Je recupère ici les infos saisies dans mon formulaire
             $data = $form->getData();
+            //$form->get('adresseDepart')->getData();
             $adress_1  = $data->getAdresseDepart();
             $adress_2  = $data->getAdresseArrivee();
             $passagers = $data->getPassagers();
@@ -41,13 +42,9 @@ class ReservationsController extends AbstractController
             // je crée ici la session
             $session = $request->getSession();
 
-            $session->get('adresseDepart',[]);
             $session->set('adresseDepart', $adress_1);
-            $session->get('adresseArrivee',[]);
             $session->set('adresseArrivee', $adress_2);
-            $session->get('passagers',[]);
             $session->set('passagers', $passagers);
-            $session->get('date',[]);
             $session->set('date', $date);
 
 
@@ -64,16 +61,14 @@ class ReservationsController extends AbstractController
                 // Message d'erreur si une des conditions est remplie
                 $this->addFlash('error', "Erreur: Grande distance sur devis");
             }
-            else if ( $kmDepart > 500  ) {
+            else if ( $kmDepart > 400  ) {
                 // Message d'erreur si une des conditions est remplie
                 $this->addFlash('error', "Erreur: Ville de départ trop éloigné");
             }
 
             else {
-
                 return $this->redirectToRoute('reservation2');
             }
-
         }
 
         return $this->render('reservations/index.html.twig', [
@@ -82,18 +77,21 @@ class ReservationsController extends AbstractController
     }
 
     #[Route('/commande', name: 'reservation2')]
-    public function newCourse(SessionInterface $session, FlashBagInterface $flashBag, Request $request, EntityManagerInterface $entityManager, GetDistance $distance): Response
+    public function newCourse(SessionInterface $session, Request $request, EntityManagerInterface $entityManager, GetDistance $distance): Response
     {
+       if(empty($session->get('adresseDepart')) && empty($session->get('adresseArrivee'))) {
+       return $this->redirectToRoute('accueil');
+      }
 
-        $adress_1 = $session->get('adresseDepart',[]);
-        $adress_2 = $session->get('adresseArrivee',[]);
-        $date = $session->get('date',[]);
+        $adress_1 = $session->get('adresseDepart');
+        $adress_2 = $session->get('adresseArrivee');
+        $date = $session->get('date');
 
         $dateConvertion = date_format($date, "d/m/Y/H:i");
 
         // Calcul de la distance du départ à l'arrivée
         $distanceBrut = $distance->apiCalculDistance($adress_1, $adress_2);
-
+        $duree = $distance->apiCalculDuree($adress_1,$adress_2);
 
 
         // J'additionne mes deux valeurs'
@@ -111,13 +109,6 @@ class ReservationsController extends AbstractController
         $kmTotal = $distance->apiCalculDistance($adress_1, $adress_2);
         // j'arrondie la distance et la stock dans une autre variable
         $kmArrondie = floor($kmTotal);
-
-        $flashBag->add('success',"Date: $dateConvertion");
-        $flashBag->add('success',"Adresse de départ: $adress_1");
-        $flashBag->add('success',"Adresse d'arrivée: $adress_2");
-        $flashBag->add('success',"Prix: $priceArrondie €");
-        $flashBag->add('success',"Distance: $kmArrondie Km");
-
 
         $client = new Clients();
 
@@ -138,6 +129,12 @@ class ReservationsController extends AbstractController
 
         return $this->render('reservations/course.html.twig', [
             'formulaireCommande' => $form->createView(),
+            'date' => $dateConvertion,
+            'adresseDepart' => $adress_1,
+            'adresseArrivee' => $adress_2,
+            'prix' => $priceArrondie,
+            'distance' => $kmArrondie,
+            'duree' => $duree
         ]);
     }
 

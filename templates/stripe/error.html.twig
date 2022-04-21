@@ -1,8 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StripeController!{% endblock %}
+{% block title %}Stripe erreur{% endblock %}
+{% block meta_description %}Cardoso VTC votre chauffeur privée dur Frontignan{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>erreur de paiement</h1>
-    <button id="checkout-button">Acheter</button>
+    <section class="section-reservation">
+        <div class="parallax-effect">
+            <div class="container text-center">
+                <div class="row">
+                    <h1 class="H1-head">Erreur de paiement</h1>
+                    <p class="P-head">Votre réservation n'a pas été prise en compte. Merci de retourner sur la page de paiement.</p>
+                    <div class="text-center mb-3">
+                        <a href="{{ path('checkout', {'id': client.id}) }}" type="button" class="button btn btn-outline-light">Retourner à la page de paiement</a>
+                        <a href="tel:0624512297" type="button" class="button2 btn btn-danger ms-3">06 24 51 22 97</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 {% endblock %}

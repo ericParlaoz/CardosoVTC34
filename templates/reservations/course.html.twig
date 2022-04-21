@@ -7,7 +7,8 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css') }}">
 {% endblock %}
 
 {% block javascripts %}
@@ -22,68 +23,121 @@
 {% block body %}
     <section class="section-reservation">
         <div class="parallax-effect4">
-        <div class="container">
-            <div class="row">
-                <div class="col ">
-                    {% for rubrique, messages in app.flashes %}
-                        <div class="alert alert-{{ rubrique }}">
-                            <h2>Informations de la course</h2>
-                            {% for message in messages %}
-                                <p>{{ message }}</p>
-                            {% endfor %}
+            <div class="container">
+                <div class="row">
+                    <div class="col wow animate__animated animate__zoomIn mt-3">
+                        <div class="card-infos">
+                            <h2 class="H2-corps">Informations de la course </h2>
+                            <ul>
+                                <li><h6>Date de réservation: {{ date }}</h6></li>
+                                <li><h6>Adresse de départ: {{ adresseDepart }}</h6></li>
+                                <li><h6>Adresse d'arrivée: {{ adresseArrivee }}</h6></li>
+                            </ul>
+                            <div class="row">
+                                <div class="col">
+                                    <h5>Prix</h5>
+                                    <h2 class="H2-corps">{{ prix }}€</h2>
+                                </div>
+                                <div class="col">
+                                    <h5>Distance</h5>
+                                    <h2 class="H2-corps">{{ distance }}km</h2>
+                                </div>
+                            </div>
                         </div>
-                    {% endfor %}
+                        <div class="card-infos mt-5">
+                            <h3 class="H2-corps">Paiement 100% sécurisé </h3>
+                            <img class="img-fluid" src="{{ asset('images/paiement-cb.png') }}" alt="">
+                        </div>
 
-                </div>
-                <div class="col ">
-                    {{ form_start(formulaireCommande) }}
-                    {% form_theme formulaireCommande 'bootstrap_5_layout.html.twig' %}
-                    <div class="col form-fond wow animate__animated animate__zoomIn">
-                        <h2 class="H2-corps">Réserver la course</h2>
-                        <div class="form-group form-text">
-                            {{ form_row(formulaireCommande.nom, {'attr': {'class': 'form-control','placeholder': 'Votre nom...'}}) }}
-                        </div>
-                        <div class="form-group form-text">
-                            {{ form_row(formulaireCommande.prenom, {'attr': {'class': 'form-control','placeholder': 'Votre prénom...'}}) }}
-                        </div>
-                        <div class="form-group form-text">
-                            {{ form_row(formulaireCommande.entreprise, {'attr': {'class': 'form-control','placeholder': 'Votre entreprise...'}}) }}
-                        </div>
-                        <div class="form-group form-text">
-                            {{ form_row(formulaireCommande.rue, {'attr': {'class': 'form-control', 'placeholder': 'Votre rue...'}}) }}
-                        </div>
-                        <div class="form-group form-text">
-                            {{ form_row(formulaireCommande.codepostal, {'attr': {'class': 'form-control', 'placeholder': 'Votre code postal...'}}) }}
-                        </div>
-                        <div class="form-group form-text">
-                            {{ form_row(formulaireCommande.ville, {'attr': {'class': 'form-control','placeholder': 'Votre ville...'}}) }}
-                        </div>
-                        <div class="form-group form-text">
-                            {{ form_row(formulaireCommande.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Votre téléphone...'}}) }}
-                        </div>
-                        <div class="form-group form-text">
-                            {{ form_row(formulaireCommande.email, {'attr': {'class': 'form-control', 'placeholder': 'Votre email...'}}) }}
-                        </div>
-                        <div class="form-group form-text">
-                            {{ form_row(formulaireCommande.infos, {'attr': {'class': 'form-control', 'placeholder': 'Étage, code portail, etc...'}}) }}
-                        </div>
-                        <div class="form-group form-text">
-                            {{ form_row(formulaireCommande.confidentialite, {'attr': {'class': 'form-control', 'placeholder': 'Votre email...'}}) }}
-                            J’autorise ce site à conserver mes données personnelles transmises via ce formulaire. Aucune exploitation
-                            commerciale ne sera faite des données conservées. Voir notre politique de gestion des données personnelles
-                            sur la page (Politique de confidentialité)
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <input type="submit" value="Payer" class="button2 btn btn-danger">
-                        </div>
+
                     </div>
-                    {{ form_end(formulaireCommande) }}
+                    <div class="col ">
+                        {{ form_start(formulaireCommande) }}
+                        {% form_theme formulaireCommande 'bootstrap_5_layout.html.twig' %}
+                        <div class="col form-fond wow animate__animated animate__zoomIn">
+                            <h2 class="H2-corps">Réserver la course</h2>
+                            <div class="form-group form-text">
+                                {{ form_row(formulaireCommande.nom, {'attr': {'class': 'form-control','placeholder': 'Votre nom...'}}) }}
+                            </div>
+                            <div class="form-group form-text">
+                                {{ form_row(formulaireCommande.prenom, {'attr': {'class': 'form-control','placeholder': 'Votre prénom...'}}) }}
+                            </div>
+                            <div class="form-group form-text">
+                                {{ form_row(formulaireCommande.entreprise, {'attr': {'class': 'form-control','placeholder': 'Votre entreprise...'}}) }}
+                            </div>
+                            <div class="form-group form-text">
+                                {{ form_row(formulaireCommande.rue, {'attr': {'class': 'form-control', 'placeholder': 'Votre rue...'}}) }}
+                            </div>
+                            <div class="form-group form-text">
+                                {{ form_row(formulaireCommande.codepostal, {'attr': {'class': 'form-control', 'placeholder': 'Votre code postal...'}}) }}
+                            </div>
+                            <div class="form-group form-text">
+                                {{ form_row(formulaireCommande.ville, {'attr': {'class': 'form-control','placeholder': 'Votre ville...'}}) }}
+                            </div>
+                            <div class="form-group form-text">
+                                {{ form_row(formulaireCommande.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Votre téléphone...'}}) }}
+                            </div>
+                            <div class="form-group form-text">
+                                {{ form_row(formulaireCommande.email, {'attr': {'class': 'form-control', 'placeholder': 'Votre email...'}}) }}
+                            </div>
+                            <div class="form-group form-text">
+                                {{ form_row(formulaireCommande.infos, {'attr': {'class': 'form-control', 'placeholder': 'Étage, code portail, etc...'}}) }}
+                            </div>
+                            <div class="form-group form-text">
+                                {{ form_row(formulaireCommande.confidentialite, {'attr': {'class': 'form-control', 'placeholder': 'Votre email...'}}) }}
+                                J’autorise ce site à conserver mes données personnelles transmises via ce formulaire.
+                                Aucune exploitation
+                                commerciale ne sera faite des données conservées. Voir notre politique de gestion des
+                                données personnelles
+                                sur la page (Politique de confidentialité)
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input type="submit" value="Payer" class="button2 btn btn-danger">
+                            </div>
+                        </div>
+                        {{ form_end(formulaireCommande) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="section5">
+        <div class="container">
+            <div class="titre">Cardoso VTC 34</div>
+            <h2 class="H2-corps">Témoignages clients</h2>
+            <div class="row mx-auto">
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div class="temoignage mx-auto">
+                        <div class="name">Fred</div>
+                        <div class="comment">Professionnel</div>
+                        <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                        <p>La relation entretenue depuis 2019 s’appuie sur la qualité du service, la ponctualité, la gestion des imprévus, les véhicules utilisés et par ailleurs des échanges fluides.</p>
+                    </div>
+                </div>
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div class="temoignage mx-auto">
+                        <div class="name">Alice</div>
+                        <div class="comment">EFFICACE</div>
+                        <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                        <p>Cardoso VTC prend en charge nos touristes depuis plusieurs années : français ou internationaux sont toujours étonnés de leur sens du service, de leur gentillesse et de leurs bonnes adresses.</p>
+                    </div>
+                </div>
+                <div class="col wow animate__animated animate__zoomIn">
+                    <div class="temoignage mx-auto">
+                        <div class="name">Eric</div>
+                        <div class="comment">PONCTUEL</div>
+                        <img class="mb-3" src="{{ asset('images/etoiles.svg') }}" alt="">
+                        <p>Chauffeur discret, cordial, très aimable et ponctuel...Conduite agréable, dans un véhicule confortable, propre et spacieux... Je recommande vivement.</p>
+                    </div>
                 </div>
             </div>
-
         </div>
-        </div>
+    </section>
+    <section class="section7">
+        <h3 class="wow animate__animated animate__lightSpeedInRight"><strong>Besoin d’un chauffeur privé ? Contactez
+                nous 24h/7j au 06 24 51 22 97</strong></h3>
     </section>
 
 {% endblock %}
