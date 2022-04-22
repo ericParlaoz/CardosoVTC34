@@ -49,6 +49,7 @@ class ClientsController extends AbstractController
 
         return $this->render('administrator/clients/show.html.twig', [
             'client' => $client,
+
         ]);
     }
 
