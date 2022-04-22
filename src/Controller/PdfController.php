@@ -21,7 +21,6 @@ class PdfController extends AbstractController
        ]);
     }
 
-
     #[Route('/pdf/{unique_id}', name: 'pdf_id')]
     public function pdfId(Clients $client): Response
     {
@@ -42,7 +41,5 @@ class PdfController extends AbstractController
         return new Response('', 200, [
             'Content-Type' => 'pdf/index.html.twig',
         ]);
-     // return $this->render('pdf/index.html.twig',[
-     //]);
     }
 }

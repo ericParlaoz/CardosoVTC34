@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Clients;
+use App\Service\GetDistance;
 use App\Service\UniqueIdService;
 use Doctrine\DBAL\Types\BigIntType;
 use Doctrine\ORM\Id\BigIntegerIdentityGenerator;
@@ -23,21 +24,33 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CommandeType extends AbstractType
 {
+    private $session;
+    private $distance;
+
+    public function __construct(SessionInterface $session, GetDistance $distance)
+    {
+        $this->session = $session;
+        $this->distance =$distance;
+    }
+
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $session = new Session();
-        $adresse1 =$session->get('adresseDepart');
-        $adresse2 =$session->get('adresseArrivee');
-        $date = $session->get('date');
+
+        $adresse1 =$this->session->get('adresseDepart');
+        $adresse2 =$this->session->get('adresseArrivee');
+        $duree = $this->distance->apiCalculDuree($adresse1,$adresse2);
+        $prix = $this->distance->apiCalculPrix($adresse1, $adresse2);
+
+        $date = $this->session->get('date');
         $dateConvertion = date_format($date, "d/m/Y/H:i");
 
-        $id = $session->getId();
-
-        //$uniqueIdService = new UniqueIdService();
-       // $uniqueBDD=  $uniqueIdService->generateRandomID($id);
+        date_default_timezone_set('Europe/Paris');
+        $dateReservation = date('d/m/Y');
 
 
         $builder
@@ -136,7 +149,18 @@ class CommandeType extends AbstractType
                 'data' => $dateConvertion,
             ])
             ->add('unique_id', HiddenType::class, [
-                'data' => $id,
+                'data' => $this->session->getId(),
+            ])
+
+            ->add('date_reservation', HiddenType::class, [
+                'data' => $dateReservation,
+            ])
+            ->add('duree', HiddenType::class, [
+                'data' => $duree,
+            ])
+
+            ->add('prix', HiddenType::class, [
+                'data' => $prix,
             ])
         ;
     }

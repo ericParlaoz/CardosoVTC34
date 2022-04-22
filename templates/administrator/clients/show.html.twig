@@ -55,6 +55,11 @@
                 <th>Date</th>
                 <td>{{ client.date }}</td>
             </tr>
+            <tr>
+                <th>Facture client</th>
+                <td><a href="{{ path('pdf_id', {unique_id: client.uniqueId}) }}" class="button2 btn btn-danger ms-3" target="_blank">Télécharger la facture client</a>
+                </td>
+            </tr>
         </tbody>
     </table>
 

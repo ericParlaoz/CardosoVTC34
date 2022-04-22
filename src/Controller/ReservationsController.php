@@ -35,7 +35,6 @@ class ReservationsController extends AbstractController
 
             // Je recupère ici les infos saisies dans mon formulaire
             $data = $form->getData();
-            //$form->get('adresseDepart')->getData();
             $adress_1  = $data->getAdresseDepart();
             $adress_2  = $data->getAdresseArrivee();
             $passagers = $data->getPassagers();
@@ -83,33 +82,15 @@ class ReservationsController extends AbstractController
        if(empty($session->get('adresseDepart')) && empty($session->get('adresseArrivee'))) {
        return $this->redirectToRoute('accueil');
       }
-
+        $id = $session->getId();
         $adress_1 = $session->get('adresseDepart');
         $adress_2 = $session->get('adresseArrivee');
         $date = $session->get('date');
-
-
         $dateConvertion = date_format($date, "d/m/Y/H:i");
 
-        // Calcul de la distance du départ à l'arrivée
-        $distanceBrut = $distance->apiCalculDistance($adress_1, $adress_2);
+        $km = $distance->apiCalculDistance($adress_1, $adress_2);
         $duree = $distance->apiCalculDuree($adress_1,$adress_2);
-
-        // J'additionne mes deux valeurs'
-        $price = ($distanceBrut * 2);
-        $priceArrondie = floor($price);
-        //dd($price);
-
-
-        // Je fait une condition qui affiche 20€ pour toute commande inferieur à 20€
-        if($priceArrondie < 20){
-            $priceArrondie = 20;
-        }
-
-        // Je stock le prix la distance brut de la course dans une variable
-        $kmTotal = $distance->apiCalculDistance($adress_1, $adress_2);
-        // j'arrondie la distance et la stock dans une autre variable
-        $kmArrondie = floor($kmTotal);
+        $prix = $distance->apiCalculPrix($adress_1, $adress_2);
 
         $client = new Clients();
 
@@ -123,12 +104,6 @@ class ReservationsController extends AbstractController
             $entityManager->persist($client);
             $entityManager->flush();
 
-            $id = $session->getId();
-           // $uniqueID = $uniqueIdService->generateRandomID($id);
-
-           // $session->set('id', $uniqueID);
-
-
 
             // Redirection sur la page de paiement et génération d'un ID
             return $this->redirectToRoute('checkout', ['id' => $id], Response::HTTP_SEE_OTHER);
@@ -139,8 +114,8 @@ class ReservationsController extends AbstractController
             'date' => $dateConvertion,
             'adresseDepart' => $adress_1,
             'adresseArrivee' => $adress_2,
-            'prix' => $priceArrondie,
-            'distance' => $kmArrondie,
+            'prix' => $prix,
+            'distance' => $km,
             'duree' => $duree
         ]);
 

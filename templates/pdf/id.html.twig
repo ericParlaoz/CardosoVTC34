@@ -5,10 +5,67 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Votre facture</title>
+    <style>
+        .info {
+            padding-top: 20px;
+        }
+        th,
+        td {
+            padding-right: 30px;
+        }
+        H2 {
+            color:#dc3545;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-{{ client.nom }}
+<img src="https://www.cardosovtc34.fr/images/logo.png" alt="">
+<div class="info">
+    <div>Cardoso VTC 34</div>
+    <div>201 avenue du maréchal juin </div>
+    <div>34110 Frontignan</div>
+    <div>reservation@cardosovtc34.fr</div>
+    <div>06 24 51 22 97</div>
+    <div>{{ client.telephone }}</div>
+</div>
+<div class="info">
+    <div>{{ client.nom }} {{ client.prenom }}</div>
+    <div>{{ client.rue }}</div>
+    <div>{{ client.codepostal }} {{ client.ville }}</div>
+    <div>{{ client.email }}</div>
+    <div>{{ client.telephone }}</div>
+</div>
+
+<H2>Facture N° </H2>
+<p>Prestation de service de tranport de passagers</p>
+<H3>Date {{ client.dateReservation }}</H3>
+<hr>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Adresse départ</th>
+        <th>Adresse arrivée</th>
+        <th>Date de la course</th>
+        <th>Prix HT</th>
+        <th>TVA</th>
+        <th>Prix TTC</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr class="table-light">
+            <td>{{ client.adressedepart }}</td>
+            <td>{{ client.adressearrivee }}</td>
+            <td>{{ client.date }}</td>
+            <td>{{ client.prix * 0.90}}</td>
+            <td>{{ client.prix * 10/100 }} €</td>
+            <td>{{ client.prix }} €</td>
+        </tr>
+    </tbody>
+</table>
+
+
 </body>
 </html>
 

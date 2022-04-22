@@ -55,6 +55,15 @@ class Clients
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $unique_id;
 
+    #[ORM\Column(type: 'string', length: 100)]
+    private $date_reservation;
+
+    #[ORM\Column(type: 'string', length: 100)]
+    private $duree;
+
+    #[ORM\Column(type: 'integer')]
+    private $prix;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -224,6 +233,42 @@ class Clients
     public function setUniqueId(string $unique_id): self
     {
         $this->unique_id = $unique_id;
+
+        return $this;
+    }
+
+    public function getDateReservation(): ?string
+    {
+        return $this->date_reservation;
+    }
+
+    public function setDateReservation(string $date_reservation): self
+    {
+        $this->date_reservation = $date_reservation;
+
+        return $this;
+    }
+
+    public function getDuree(): ?string
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(string $duree): self
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }
