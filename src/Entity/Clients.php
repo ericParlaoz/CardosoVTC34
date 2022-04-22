@@ -52,6 +52,9 @@ class Clients
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $date;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $unique_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -209,6 +212,18 @@ class Clients
     public function setDate(?string $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getUniqueId(): ?string
+    {
+        return $this->unique_id;
+    }
+
+    public function setUniqueId(string $unique_id): self
+    {
+        $this->unique_id = $unique_id;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Clients;
+use App\Service\UniqueIdService;
 use Doctrine\DBAL\Types\BigIntType;
 use Doctrine\ORM\Id\BigIntegerIdentityGenerator;
 use Symfony\Component\Form\AbstractType;
@@ -33,6 +34,10 @@ class CommandeType extends AbstractType
         $date = $session->get('date');
         $dateConvertion = date_format($date, "d/m/Y/H:i");
 
+        $id = $session->getId();
+
+        //$uniqueIdService = new UniqueIdService();
+       // $uniqueBDD=  $uniqueIdService->generateRandomID($id);
 
 
         $builder
@@ -129,6 +134,9 @@ class CommandeType extends AbstractType
             ])
             ->add('date', HiddenType::class, [
                 'data' => $dateConvertion,
+            ])
+            ->add('unique_id', HiddenType::class, [
+                'data' => $id,
             ])
         ;
     }

@@ -3,16 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Clients;
+use App\Entity\Course;
 use App\Form\CommandeType;
 use App\Form\CourseType;
 use App\Service\GetDistance;
+use App\Service\UniqueIdService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,8 +28,10 @@ class ReservationsController extends AbstractController
         // Hydratation de mon formulaire
         $form->handleRequest($request);
 
+
         // Si le formulaire et soumis et valide :
         if ($form->isSubmitted() && $form->isValid()) {
+
 
             // Je recupère ici les infos saisies dans mon formulaire
             $data = $form->getData();
@@ -46,7 +48,6 @@ class ReservationsController extends AbstractController
             $session->set('adresseArrivee', $adress_2);
             $session->set('passagers', $passagers);
             $session->set('date', $date);
-
 
             $kmTotal = $distance->apiCalculDistance($adress_1, $adress_2);
             $kmDepart = $distance->depart($adress_1);
@@ -77,7 +78,7 @@ class ReservationsController extends AbstractController
     }
 
     #[Route('/commande', name: 'reservation2')]
-    public function newCourse(SessionInterface $session, Request $request, EntityManagerInterface $entityManager, GetDistance $distance): Response
+    public function newCourse(SessionInterface $session, Request $request, EntityManagerInterface $entityManager, GetDistance $distance, UniqueIdService $uniqueIdService): Response
     {
        if(empty($session->get('adresseDepart')) && empty($session->get('adresseArrivee'))) {
        return $this->redirectToRoute('accueil');
@@ -87,12 +88,12 @@ class ReservationsController extends AbstractController
         $adress_2 = $session->get('adresseArrivee');
         $date = $session->get('date');
 
+
         $dateConvertion = date_format($date, "d/m/Y/H:i");
 
         // Calcul de la distance du départ à l'arrivée
         $distanceBrut = $distance->apiCalculDistance($adress_1, $adress_2);
         $duree = $distance->apiCalculDuree($adress_1,$adress_2);
-
 
         // J'additionne mes deux valeurs'
         $price = ($distanceBrut * 2);
@@ -122,9 +123,15 @@ class ReservationsController extends AbstractController
             $entityManager->persist($client);
             $entityManager->flush();
 
+            $id = $session->getId();
+           // $uniqueID = $uniqueIdService->generateRandomID($id);
+
+           // $session->set('id', $uniqueID);
+
+
 
             // Redirection sur la page de paiement et génération d'un ID
-            return $this->redirectToRoute('checkout', ['id' => $client->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('checkout', ['id' => $id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('reservations/course.html.twig', [
@@ -136,6 +143,8 @@ class ReservationsController extends AbstractController
             'distance' => $kmArrondie,
             'duree' => $duree
         ]);
+
+
     }
 
 }

@@ -46,6 +46,7 @@ class ClientsController extends AbstractController
     #[Route('/{id}', name: 'clients_show', methods: ['GET'])]
     public function show(Clients $client): Response
     {
+
         return $this->render('administrator/clients/show.html.twig', [
             'client' => $client,
         ]);
