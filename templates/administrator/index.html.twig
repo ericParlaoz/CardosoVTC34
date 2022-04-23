@@ -4,24 +4,21 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 {% endblock %}
 
 {% block body %}
-
-    <div class="border d-flex align-items-center justify-content-center" style="height: 700px;">
-        <div  class ="card2 text-dark bg-light mb-3 rounded-30" style="max-width: 50rem">
-            <span><H1 class="title card-header text-center">Bienvenue Mr Cardoso</H1></span>
-            <div class="card-body text-center">
-
-                <a class="bouton btn btn-primary" href="{{ path('clients_index') }}">Mes réservations</a>
-                <a class="bouton btn btn-danger" href="/{{ path('app_logout') }}">Se déconnecter</a>
-
-
+    <section class="section-admin">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <div class="card-admin">
+                    <h2 class="H2-corps">Bienvenue Mr Cardoso</h2>
+                    <a class="button2 btn btn-primary" href="{{ path('clients_index') }}">Mes réservations</a>
+                    <a class="button2 btn btn-danger" href="/{{ path('app_logout') }}">Se déconnecter</a>
+                </div>
             </div>
         </div>
     </div>
-
-
-
+    </section>
 {% endblock %}

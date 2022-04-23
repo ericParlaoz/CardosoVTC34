@@ -4,55 +4,37 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 {% endblock %}
 
 {% block body %}
-            <div class="container">
-            <div class="row-admin">
-            <H1 class="title card-header text-center">Liste des réservations</H1>
-            <div class="card-body text-center">
-
-                <table class="table">
-                    <thead>
+    <section class="section-admin">
+        <div class="container">
+            <div class="row">
+                <h2 class="H2-corps">Liste des courses</h2>
+                {% for client in clients %}
+                    <div class="col">
+                        <div class="card-admin">
+                            <div><strong>Date de la course:</strong> {{ client.date }}</div>
+                            <div><strong>Nom client:</strong> {{ client.nom }}</div>
+                            <div><strong>Prénom client:</strong> {{ client.prenom }}</div>
+                            <div><strong>Téléphone client:</strong> {{ client.telephone }}</div>
+                            <div><strong>Adreese de départ:</strong> {{ client.adresseDepart }}</div>
+                            <div><strong>Adreese d'arrivée:</strong> {{ client.adresseArrivee }}</div>
+                            <div>
+                                {{ include('administrator/clients/_delete_form.html.twig') }} <a class=" btn btn-primary" href="{{ path('clients_show', {'id': client.id}) }}">Infos
+                                    clients</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
                     <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Télephone</th>
-                        <th>Adresse depart</th>
-                        <th>Adresse arrivee</th>
-                        <th>date</th>
-                        <th>Prix</th>
-                        <th>Actions</th>
+                        <td colspan="10">Pas de résultat</td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for client in clients %}
-                        <tr class="table-light">
-                            <td>{{ client.nom }}</td>
-                            <td>{{ client.prenom }}</td>
-                            <td>{{ client.telephone }}</td>
-                            <td>{{ client.adresseDepart }}</td>
-                            <td>{{ client.adresseArrivee }}</td>
-                            <td>{{ client.date }}</td>
-                            <td>{{ client.prix }} €</td>
-                            <td>
-                                {{ include('administrator/clients/_delete_form.html.twig') }}
-                                <a class=" btn btn-primary" href="{{ path('clients_show', {'id': client.id}) }}">Infos clients</a>
+                {% endfor %}
+            </div>
+            <a class="bouton btn btn-primary" href="{{ path('admin') }}">Retour</a>
 
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="10">Pas de résultat</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <a class="bouton btn btn-success" href="{{ path('clients_new') }}">Nouveau</a>
-                <a class="bouton btn btn-primary" href="{{ path('admin') }}">Retour</a>
-            </div>
-            </div>
-            </div>
-
+        </div>
+    </section>
 {% endblock %}

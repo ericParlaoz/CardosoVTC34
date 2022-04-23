@@ -18,6 +18,7 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
 
     {
+
             return $this->render('administrator/index.html.twig', [
             ]);
     }
@@ -30,13 +31,6 @@ class DashboardController extends AbstractDashboardController
         ]);
     }
 
-    #[Route('/admin/course', name: 'admin_course')]
-    public function courseListes(CourseRepository $courseRepository): Response
-    {
-        return $this->render('administrator/course/index.html.twig', [
-            'courses' => $courseRepository->findAll(),
-        ]);
-    }
 
 
     public function configureDashboard(): Dashboard
