@@ -69,7 +69,7 @@ class CourseType extends AbstractType
               //  'format' => 'dd/MM/yyyy',
                 'label' => "Date de réservation",
                 'constraints' => [
-                    new Assert\GreaterThan("+2 hours", message: "Veillez sélectionner une date supérieure de 30 minutes de plus !")
+                    new Assert\GreaterThan("+2 hours", message: "Veillez sélectionner une date de réservation correcte !")
                 ]
             ]);
     }

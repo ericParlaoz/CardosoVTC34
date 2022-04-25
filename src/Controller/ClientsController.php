@@ -18,6 +18,8 @@ class ClientsController extends AbstractController
     #[Route('/', name: 'clients_index', methods: ['GET'])]
     public function index(ClientsRepository $clientsRepository): Response
     {
+
+
         return $this->render('administrator/clients/index.html.twig', [
             'clients' => $clientsRepository->findAll(),
         ]);

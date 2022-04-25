@@ -27,7 +27,8 @@ class DashboardController extends AbstractDashboardController
     public function clientListes(ClientsRepository $clientsRepository): Response
     {
         return $this->render('administrator/clients/index.html.twig', [
-            'clients' => $clientsRepository->findAll(),
+            //'clients' => $clientsRepository->findAll(),
+            'clients' => $clientsRepository->findBy([],['date'=> 'DESC']),
         ]);
     }
 

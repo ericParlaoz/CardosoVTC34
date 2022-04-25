@@ -1,0 +1,10 @@
+{% block body %}
+    <h1>Vous avez reçu un nouveau message du site</h1>
+    <h2>Infos du contact: </h2>
+    <ul>
+        <li>Nom du contact: {{ nomrender }}</li>
+        <li>Adresse email: {{ emailrender }}</li>
+        <li>Téléphone: {{ telrender }}</li>
+        <li>Message: {{ messagerender }}</li>
+    </ul>
+{% endblock %}

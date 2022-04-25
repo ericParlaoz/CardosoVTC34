@@ -10,9 +10,12 @@
         .info {
             padding-top: 20px;
         }
+        .info-facturation {
+            padding-left: 450px;
+        }
         th,
         td {
-            padding-right: 30px;
+            padding-right: 25px;
         }
         H2 {
             color:#dc3545;
@@ -23,14 +26,13 @@
 <body>
 <img src="https://www.cardosovtc34.fr/images/logo.png" alt="">
 <div class="info">
-    <div>Cardoso VTC 34</div>
     <div>201 avenue du maréchal juin </div>
     <div>34110 Frontignan</div>
     <div>reservation@cardosovtc34.fr</div>
     <div>06 24 51 22 97</div>
-    <div>{{ client.telephone }}</div>
 </div>
-<div class="info">
+<div class="info-facturation">
+    <div>{{ client.entreprise }}</div>
     <div>{{ client.nom }} {{ client.prenom }}</div>
     <div>{{ client.rue }}</div>
     <div>{{ client.codepostal }} {{ client.ville }}</div>
@@ -49,7 +51,7 @@
         <th>Adresse arrivée</th>
         <th>Date de la course</th>
         <th>Prix HT</th>
-        <th>TVA</th>
+        <th>TVA (10%)</th>
         <th>Prix TTC</th>
     </tr>
     </thead>

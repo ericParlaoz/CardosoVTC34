@@ -7,7 +7,6 @@ use App\Entity\Course;
 use App\Form\CommandeType;
 use App\Form\CourseType;
 use App\Service\GetDistance;
-use App\Service\UniqueIdService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,18 +51,19 @@ class ReservationsController extends AbstractController
             $kmDepart = $distance->depart($adress_1);
 
             // Mes conditions
-            if ($kmTotal === 0 || $adress_1 === false || $adress_2 === false )  {
-                // Message d'erreur si une des conditions est remplie
+            if ($kmTotal === 0.0 || $adress_1 === false || $adress_2 === false )  {
                 $this->addFlash('error', "Erreur: Veillez renseigner par des adresses valides !");
 
             }
             else if ( $kmTotal > 800  ) {
-                // Message d'erreur si une des conditions est remplie
                 $this->addFlash('error', "Erreur: Grande distance sur devis");
             }
             else if ( $kmDepart > 400  ) {
-                // Message d'erreur si une des conditions est remplie
-                $this->addFlash('error', "Erreur: Ville de départ trop éloigné");
+                $this->addFlash('error', "Erreur: Ville de départ non prise en charge !");
+            }
+
+            else if ( $kmDepart > 200 && $kmTotal < 150  ) {
+                $this->addFlash('error', "Erreur: La distance de la course n'est pas suffisante !");
             }
 
             else {
@@ -77,7 +77,7 @@ class ReservationsController extends AbstractController
     }
 
     #[Route('/commande', name: 'reservation2')]
-    public function newCourse(SessionInterface $session, Request $request, EntityManagerInterface $entityManager, GetDistance $distance, UniqueIdService $uniqueIdService): Response
+    public function newCourse(SessionInterface $session, Request $request, EntityManagerInterface $entityManager, GetDistance $distance): Response
     {
        if(empty($session->get('adresseDepart')) && empty($session->get('adresseArrivee'))) {
        return $this->redirectToRoute('accueil');

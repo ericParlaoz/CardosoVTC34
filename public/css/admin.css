@@ -1,43 +1,37 @@
+html,
 body {
-    font-family: "montserrat", Arial, Helvetica, sans-serif;
-    font-size: 15px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 2px;
+}
+
+#map-canvas {
+    height: 100%;
+    width: 78%;
+    float: left;
+    border: 1px solid #996699;
+    border-radius: 5px;
+}
+
+#floating-panel {
+    position: float top;
+    z-index: 5;
+    background-color: #9999cc;
+    padding: 5px;
+    border: 1px solid #996699;
+    border-radius: 5px;
     text-align: center;
-    /* On peut définir un fond en couleurs dégradées à l'aide de la fonction css linear-gradient qui peut prendre différentes couleurs et les disposer en interpolant entre chaque pour créer un effet de dégradé*/
-    /* On peut orienter le dégradé en spécifiant une orientation sous la forme d'un angle en degrés */
-    background: linear-gradient(
-            180deg,
-            rgba(51, 128, 177, 1) 0%,
-            rgba(233, 170, 179, 1) 100%
-    );
-    /* en spécifiant background-attachement fixed on indique la volonté d'attacher le fond dégradé non pas à notre élément <body> mais au "viewport" qui est la vue entière dans laquelle notre page s'affiche */
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
 }
 
-.bouton {
-    color: #FFFFFF;
-    border-radius: 20px;
-}
-
-.row-admin {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    border-radius: 30px;
-    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.27);
-    background-color: #FFFFFF;
-
-}
-
-.card {
-    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
-
-}
-
-
-.card2 {
-    background-color: transparent;
-    color: #FFFFFF;
-}
-.card2 {
-    background-color: transparent;
-    border-radius: 20px;
-    color: #FFFFFF;
+#output {
+    float: left;
+    height: 100%;
 }
