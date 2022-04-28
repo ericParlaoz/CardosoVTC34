@@ -56,14 +56,14 @@ class ReservationsController extends AbstractController
 
             }
             else if ( $kmTotal > 800  ) {
-                $this->addFlash('error', "Erreur: Grande distance sur devis");
+                $this->addFlash('error', "Grande distance sur devis");
             }
             else if ( $kmDepart > 400  ) {
                 $this->addFlash('error', "Erreur: Ville de départ non prise en charge !");
             }
 
             else if ( $kmDepart > 200 && $kmTotal < 150  ) {
-                $this->addFlash('error', "Erreur: La distance de la course n'est pas suffisante !");
+                $this->addFlash('error', "La distance de la course n'est pas suffisante !");
             }
 
             else {

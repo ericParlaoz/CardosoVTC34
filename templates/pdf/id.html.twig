@@ -17,7 +17,7 @@
         td {
             padding-right: 25px;
         }
-        H2 {
+        H3 {
             color:#dc3545;
             font-weight: bold;
         }
@@ -39,10 +39,9 @@
     <div>{{ client.email }}</div>
     <div>{{ client.telephone }}</div>
 </div>
-
-<H2>Facture N° </H2>
+<H4>Date {{ client.dateReservation }}</H4>
+<H3>Facture N° {{ client.dateReservation }}-{{ client.id}} </H3>
 <p>Prestation de service de tranport de passagers</p>
-<H3>Date {{ client.dateReservation }}</H3>
 <hr>
 <table class="table">
     <thead>
@@ -66,6 +65,9 @@
         </tr>
     </tbody>
 </table>
+<hr>
+<p>Règlement par carte bleue</p>
+
 
 
 </body>
