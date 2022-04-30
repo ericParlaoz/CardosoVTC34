@@ -17,7 +17,7 @@
                     <p class="P-head">Votre réservation a bien été prise en compte. Nous allons vous recontacter
                         rapidement par téléphone.</p>
                     <div class="text-center mb-3">
-                        <a href="{{ asset('/') }}" type="button" class="button btn btn-outline-light">Retour à
+                        <a href="{{ path('accueil') }}" type="button" class="button btn btn-outline-light">Retour à
                             l'accueil</a>
                         <a href="tel:0624512297" type="button" class="button2 btn btn-danger ms-3">06 24 51 22 97</a>
                         <a href="{{ path('pdf_id', {unique_id: client.uniqueId}) }}" class="button2 btn btn-danger ms-3" target="_blank">Télécharger votre facture</a>

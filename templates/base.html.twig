@@ -173,11 +173,11 @@
         <!-- Footer -->
     {% endblock %}
     {% block javascripts %}
-        <script defer src="https://js.stripe.com/v3/"></script>
-        <script defer src="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script defer src="{{ asset('https://kit.fontawesome.com/eda674f759.js') }}" crossorigin="anonymous"></script>
+        <script  src="https://js.stripe.com/v3/"></script>
+        <script  src="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script  src="{{ asset('https://kit.fontawesome.com/eda674f759.js') }}" crossorigin="anonymous"></script>
         <script src="{{ asset('js/cookiechoices.js') }}"></script>
-        <script>document.addEventListener('DOMContentLoaded', function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’accepte', 'En savoir plus', '{{ asset('/confidentialite') }}');});
+        <script>document.addEventListener('DOMContentLoaded', function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’accepte', 'En savoir plus', '{{ path('confidentialite') }}');});
         </script>
     {% endblock %}
     </body>

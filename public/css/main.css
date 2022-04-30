@@ -2,7 +2,10 @@ body {
     font-family: "montserrat", Arial, Helvetica, sans-serif;
     font-size: 15px;
 }
-
+#map {
+    height: 300px;
+    width: auto;
+}
 .container {
     max-width: 1080px;
 }

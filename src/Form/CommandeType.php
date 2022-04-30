@@ -37,7 +37,6 @@ class CommandeType extends AbstractType
         $this->distance =$distance;
     }
 
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
@@ -169,6 +168,7 @@ class CommandeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Clients::class,
+
         ]);
     }
 }

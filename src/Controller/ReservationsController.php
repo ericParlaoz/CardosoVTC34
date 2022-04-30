@@ -92,6 +92,7 @@ class ReservationsController extends AbstractController
         $duree = $distance->apiCalculDuree($adress_1,$adress_2);
         $prix = $distance->apiCalculPrix($adress_1, $adress_2);
 
+
         $client = new Clients();
 
         // Création de mon formulaire
@@ -116,7 +117,8 @@ class ReservationsController extends AbstractController
             'adresseArrivee' => $adress_2,
             'prix' => $prix,
             'distance' => $km,
-            'duree' => $duree
+            'duree' => $duree,
+
         ]);
 
 
