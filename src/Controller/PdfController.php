@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Clients;
+use App\Entity\Facture;
 use App\Repository\ClientsRepository;
+use App\Repository\FactureRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,16 +23,17 @@ class PdfController extends AbstractController
        ]);
     }
 
-    #[Route('/pdf/{unique_id}', name: 'pdf_id')]
-    public function pdfId(Clients $client): Response
+    #[Route('/pdf-client/{unique_id}', name: 'pdf_id')]
+    public function pdfClient(Clients $client): Response
     {
         $pdfOptions = new Options();
         $pdfOptions->setDefaultFont('Arial');
         $pdfOptions->setIsRemoteEnabled(true);
         $dompdf = new Dompdf($pdfOptions);
 
-        $html = $this->renderView('pdf/id.html.twig', [
-            'client' => $client
+
+        $html = $this->renderView('pdf/client.html.twig', [
+            'client' => $client,
         ]);
 
         $dompdf->loadHtml($html);
@@ -39,7 +42,31 @@ class PdfController extends AbstractController
         $dompdf->stream( "Facture");
 
         return new Response('', 200, [
-            'Content-Type' => 'pdf/index.html.twig',
+            'Content-Type' => 'pdf/client.html.twig',
+        ]);
+    }
+
+    #[Route('/pdf-compta/{id}', name: 'pdf_compta_id')]
+    public function pdfCompta(Facture $facture, ClientsRepository $clientsRepository): Response
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->setDefaultFont('Arial');
+        $pdfOptions->setIsRemoteEnabled(true);
+        $dompdf = new Dompdf($pdfOptions);
+
+
+        $html = $this->renderView('pdf/compta.html.twig', [
+            'facture' => $facture,
+
+        ]);
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4');
+        $dompdf->render();
+        $dompdf->stream( "Facture");
+
+        return new Response('', 200, [
+            'Content-Type' => 'pdf/compta.html.twig',
         ]);
     }
 }

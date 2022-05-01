@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Votre facture</title>
+    <style>
+        .info {
+            padding-top: 20px;
+        }
+        .info-facturation {
+            padding-left: 450px;
+        }
+        th,
+        td {
+            padding-right: 25px;
+        }
+        H3 {
+            color:#dc3545;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<img src="https://www.cardosovtc34.fr/images/logo.png" alt="">
+<div class="info">
+    <div>201 avenue du maréchal juin </div>
+    <div>34110 Frontignan</div>
+    <div>reservation@cardosovtc34.fr</div>
+    <div>06 24 51 22 97</div>
+</div>
+<div class="info-facturation">
+    <div>{{ facture.entreprise }}</div>
+    <div>{{ facture.nom }} {{ facture.prenom }}</div>
+    <div>{{ facture.rue }}</div>
+    <div>{{ facture.codepostal }} {{ facture.ville }}</div>
+    <div>{{ facture.email }}</div>
+    <div>{{ facture.telephone }}</div>
+</div>
+<H4>Date {{ facture.dateReservation }}</H4>
+<H3>Facture N° {{ facture.dateReservation }}-{{ facture.id}} </H3>
+<p>Prestation de service de tranport de passagers</p>
+<hr>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Adresse départ</th>
+        <th>Adresse arrivée</th>
+        <th>Date de la course</th>
+        <th>Prix HT</th>
+        <th>TVA (10%)</th>
+        <th>Prix TTC</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr class="table-light">
+            <td>{{ facture.adressedepart }}</td>
+            <td>{{ facture.adressearrivee }}</td>
+            <td>{{ facture.date }}</td>
+            <td>{{ facture.prix * 0.90}}</td>
+            <td>{{ facture.prix * 10/100 }} €</td>
+            <td>{{ facture.prix }} €</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<p>Règlement par carte bleue</p>
+
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Facture index{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="section-admin">
+        <div class="container">
+            <h2 class="H2-corps">Comptabilité</h2>
+            <a class="button2 btn btn-primary" href="{{ path('admin') }}">Retour</a>
+            <a class="button2 btn btn-danger" href="{{ asset('/logout') }}">Se déconnecter</a>
+            <div class="card-admin mt-5">
+                <a class="button2 btn btn-success" href="{{ path('compta_2022') }}">Année 2022</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

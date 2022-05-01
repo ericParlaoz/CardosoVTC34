@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Clients;
-use App\Form\ClientsType;
 use App\Form\CommandeType;
 use App\Repository\ClientsRepository;
 use Doctrine\ORM\EntityManagerInterface;

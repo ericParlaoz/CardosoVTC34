@@ -3,10 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ClientsRepository;
+use App\Repository\FactureRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ClientsRepository::class)]
-class Clients
+#[ORM\Entity(repositoryClass: FactureRepository::class)]
+class Facture
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -37,12 +38,6 @@ class Clients
     #[ORM\Column(type: 'string', length: 100)]
     private $email;
 
-    #[ORM\Column(type: 'boolean')]
-    private $confidentialite;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $infos;
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $adresse_depart;
 
@@ -57,9 +52,6 @@ class Clients
 
     #[ORM\Column(type: 'string', length: 100)]
     private $date_reservation;
-
-    #[ORM\Column(type: 'string', length: 100)]
-    private $duree;
 
     #[ORM\Column(type: 'integer')]
     private $prix;
@@ -168,29 +160,6 @@ class Clients
         return $this;
     }
 
-    public function getConfidentialite(): ?bool
-    {
-        return $this->confidentialite;
-    }
-
-    public function setConfidentialite(bool $confidentialite): self
-    {
-        $this->confidentialite = $confidentialite;
-
-        return $this;
-    }
-
-    public function getInfos(): ?string
-    {
-        return $this->infos;
-    }
-
-    public function setInfos(?string $infos): self
-    {
-        $this->infos = $infos;
-
-        return $this;
-    }
 
     public function getAdresseDepart(): ?string
     {
@@ -248,18 +217,6 @@ class Clients
     public function setDateReservation(string $date_reservation): self
     {
         $this->date_reservation = $date_reservation;
-
-        return $this;
-    }
-
-    public function getDuree(): ?string
-    {
-        return $this->duree;
-    }
-
-    public function setDuree(string $duree): self
-    {
-        $this->duree = $duree;
 
         return $this;
     }

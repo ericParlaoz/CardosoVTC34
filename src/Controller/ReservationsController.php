@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Clients;
 use App\Entity\Course;
+use App\Entity\Facture;
 use App\Form\CommandeType;
 use App\Form\CourseType;
 use App\Service\GetDistance;
@@ -93,15 +94,53 @@ class ReservationsController extends AbstractController
         $prix = $distance->apiCalculPrix($adress_1, $adress_2);
 
 
-        $client = new Clients();
+        //$client = new Clients();
 
         // Création de mon formulaire
-        $form = $this->createForm(CommandeType::class, $client);
+        $form = $this->createForm(CommandeType::class);
         // Hydratation de mon formulaire
         $form->handleRequest($request);
 
         // Si le formulaire et soumis et valide :
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            $facture = new Facture();
+            $facture->setNom($data['nom']);
+            $facture->setPrenom($data['prenom']);
+            $facture->setrue($data['rue']);
+            $facture->setCodepostal($data['codepostal']);
+            $facture->setVille($data['ville']);
+            $facture->setTelephone($data['telephone']);
+            $facture->setEmail($data['email']);
+            $facture->setDateReservation($data['date_reservation']);
+            $facture->setPrix($data['prix']);
+            $facture->setAdresseDepart($data['adresse_depart']);
+            $facture->setAdresseArrivee($data['adresse_arrivee']);
+            $facture->setDate($data['date']);
+            $facture->setDateCompta($data['date_compta']);
+
+            $client = new Clients();
+            $client->setNom($data['nom']);
+            $client->setPrenom($data['prenom']);
+            $client->setrue($data['rue']);
+            $client->setCodepostal($data['codepostal']);
+            $client->setVille($data['ville']);
+            $client->setTelephone($data['telephone']);
+            $client->setEmail($data['email']);
+            $client->setDateReservation($data['date_reservation']);
+            $client->setPrix($data['prix']);
+            $client->setAdresseDepart($data['adresse_depart']);
+            $client->setAdresseArrivee($data['adresse_arrivee']);
+            $client->setDate($data['date']);
+            $client->setConfidentialite($data['confidentialite']);
+            $client->setInfos($data['infos']);
+            $client->setDuree($data['duree']);
+            $client->setUniqueId($data['unique_id']);
+            $client->setDateCompta($data['date_compta']);
+
+            $entityManager->persist($facture);
             $entityManager->persist($client);
             $entityManager->flush();
 

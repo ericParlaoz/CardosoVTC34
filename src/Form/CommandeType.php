@@ -45,11 +45,14 @@ class CommandeType extends AbstractType
         $duree = $this->distance->apiCalculDuree($adresse1,$adresse2);
         $prix = $this->distance->apiCalculPrix($adresse1, $adresse2);
 
+
         $date = $this->session->get('date');
         $dateConvertion = date_format($date, "d/m/Y/H:i");
 
+
         date_default_timezone_set('Europe/Paris');
-        $dateReservation = date('d/m/Y');
+        $dateReservation = date('Y/m/d');
+        $dateCompta= date( "Y");
 
 
         $builder
@@ -147,6 +150,9 @@ class CommandeType extends AbstractType
             ->add('date', HiddenType::class, [
                 'data' => $dateConvertion,
             ])
+            ->add('date_compta', HiddenType::class, [
+                'data' => $dateCompta,
+            ])
             ->add('unique_id', HiddenType::class, [
                 'data' => $this->session->getId(),
             ])
@@ -167,7 +173,10 @@ class CommandeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Clients::class,
+           // 'data_class' => Clients::class,
+            'data_class' => null,
+
+
 
         ]);
     }
