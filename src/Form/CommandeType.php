@@ -2,11 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Clients;
 use App\Service\GetDistance;
-use App\Service\UniqueIdService;
-use Doctrine\DBAL\Types\BigIntType;
-use Doctrine\ORM\Id\BigIntegerIdentityGenerator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -17,14 +13,11 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Positive;
-use Symfony\Component\Validator\Constraints\PositiveOrZero;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+
 
 class CommandeType extends AbstractType
 {
@@ -39,28 +32,29 @@ class CommandeType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
+        // Je recupère les infos enregitrees dans la session pour les enregitrer dans des variables
         $adresse1 =$this->session->get('adresseDepart');
         $adresse2 =$this->session->get('adresseArrivee');
+        $date = $this->session->get('date');
+
+        // Je converti mon objet date en format "string" pour le futur enregistrement en bdd
+        $dateConvertion = date_format($date, "d/m/Y/H:i");
+
+        // Je fait appel à mon service de calcul et je les enregitre dans des variables
         $duree = $this->distance->apiCalculDuree($adresse1,$adresse2);
         $prix = $this->distance->apiCalculPrix($adresse1, $adresse2);
 
-
-        $date = $this->session->get('date');
-        $dateConvertion = date_format($date, "d/m/Y/H:i");
-
-
+        // Je convertis les dates pour les champs
         date_default_timezone_set('Europe/Paris');
         $dateReservation = date('Y/m/d');
         $dateCompta= date( "Y");
 
-
         $builder
             ->add('nom', TextType::class,[
-                'required' => true,
+                'required' => true, // Le champs est requis
                 'label' => "Votre nom",
                 'constraints' => [
-                    new NotBlank([
+                    new NotBlank([ // Message en cas de champs vide
                         'message' => 'Veuillez saisir votre nom'
                     ])
                 ]
@@ -141,8 +135,8 @@ class CommandeType extends AbstractType
                 'label'    => 'Confidentialité',
                 'required' => true,
             ])
-            ->add('adresse_depart', HiddenType::class, [
-                'data' => $adresse1,
+            ->add('adresse_depart', HiddenType::class, [ // champs hidden (non visible dans la vue)
+                'data' => $adresse1, // j'ultilise les variables sur tous mes champs suivants
             ])
             ->add('adresse_arrivee', HiddenType::class, [
                 'data' => $adresse2,
@@ -173,11 +167,7 @@ class CommandeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-           // 'data_class' => Clients::class,
-            'data_class' => null,
-
-
-
+            'data_class' => null, // j'utilise le paramètre "null" car ce formulaire est destiné à deux entités
         ]);
     }
 }

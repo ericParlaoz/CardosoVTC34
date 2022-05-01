@@ -36,15 +36,19 @@
                 {% endfor %}
                 <div class="row">
                     <div class="col">
-                        <h5>Recettes actuelles HT</h5>
+                        <h6>Recettes actuelles HT</h6>
                         <h2 class="H2-corps">{{ recettes * 0.90 }}€</h2>
                     </div>
                     <div class="col">
-                        <h5>Recettes actuelles TTC</h5>
+                        <h6>TVA</h6>
+                        <h2 class="H2-corps">{{ recettes * 10/100 }}€</h2>
+                    </div>
+                    <div class="col">
+                        <h6>Recettes actuelles TTC</h6>
                         <h2 class="H2-corps">{{ recettes }}€</h2>
                     </div>
                     <div class="col">
-                        <h5>Nombres de courses</h5>
+                        <h6>Nombres de courses</h6>
                         <h2 class="H2-corps">{{ courses }}</h2>
                     </div>
                 </div>

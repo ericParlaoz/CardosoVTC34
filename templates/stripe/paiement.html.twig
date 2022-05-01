@@ -120,13 +120,16 @@
             <div class="col-sm-6 mt-5">
                 <div class="paiement">
             <H2 class="H2-corps">Paiement sécurisé avec Stripe</H2>
-            {% for rubrique, messages in app.flashes %}
-                <div class="alert alert-{{ rubrique }}">
-                    {% for message in messages %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endfor %}
+                    <div class="row">
+                        <div class="col">
+                            <h5>Prix</h5>
+                            <h2 class="H2-corps">{{ prix }}€</h2>
+                        </div>
+                        <div class="col">
+                            <h5>Distance</h5>
+                            <h2 class="H2-corps">{{ distance }}km</h2>
+                        </div>
+                    </div>
             <form id="payment-form">
                 <div id="payment-element">
                     <!--Stripe.js injects the Payment Element-->

@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Clients;
 use App\Entity\Facture;
-use App\Repository\ClientsRepository;
-use App\Repository\FactureRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,14 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PdfController extends AbstractController
 {
-    #[Route('/pdf', name: 'pdf_index')]
-    public function index(ClientsRepository $clientsRepository): Response
-    {
-        $clients = $clientsRepository->findAll();
-       return $this->render('pdf/index.html.twig',[
-           'clients' => $clients
-       ]);
-    }
 
     #[Route('/pdf-client/{unique_id}', name: 'pdf_id')]
     public function pdfClient(Clients $client): Response
@@ -30,7 +20,6 @@ class PdfController extends AbstractController
         $pdfOptions->setDefaultFont('Arial');
         $pdfOptions->setIsRemoteEnabled(true);
         $dompdf = new Dompdf($pdfOptions);
-
 
         $html = $this->renderView('pdf/client.html.twig', [
             'client' => $client,
@@ -47,7 +36,7 @@ class PdfController extends AbstractController
     }
 
     #[Route('/pdf-compta/{id}', name: 'pdf_compta_id')]
-    public function pdfCompta(Facture $facture, ClientsRepository $clientsRepository): Response
+    public function pdfCompta(Facture $facture): Response
     {
         $pdfOptions = new Options();
         $pdfOptions->setDefaultFont('Arial');
