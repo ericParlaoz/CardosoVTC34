@@ -3,15 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Clients;
-use App\Entity\Course;
 use App\Entity\Facture;
 use App\Form\CommandeType;
 use App\Form\CourseType;
-use App\Service\GetDistance;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\CalculCourse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReservationsController extends AbstractController
 {
     #[Route('/', name: 'reservation')]
-    public function newCourseBDD(Request $request, GetDistance $distance)
+    public function newCourseBDD(Request $request, CalculCourse $calcul)
     {
 
         // Création de mon formulaire de calcul de course
@@ -50,9 +47,9 @@ class ReservationsController extends AbstractController
 
             // Je fait appel à mon service de calcul de distance pour avoir la ditance totale
             // Grâce à ce resultat, je peut vérifier mes conditions
-            $kmTotal = $distance->apiCalculDistance($adress_1, $adress_2);
+            $kmTotal = $calcul->apiCalculDistance($adress_1, $adress_2);
             // Je fait ici le calcul de la ditance de départ et de la ville de départ du chauffeur privé pour mettre en place des conditions
-            $kmDepart = $distance->depart($adress_1);
+            $kmDepart = $calcul->apiCaclulDepart($adress_1);
 
             // Mes différebtes conditions
             if ($kmTotal === 0.0 || $adress_1 === false || $adress_2 === false )  {
@@ -82,7 +79,7 @@ class ReservationsController extends AbstractController
     }
 
     #[Route('/commande', name: 'commande')]
-    public function newCommande(SessionInterface $session, Request $request, GetDistance $distance): Response
+    public function newCommande(SessionInterface $session, Request $request, CalculCourse $calcul): Response
     {
         // Je corrige l'erreur d'accès à cette route si on passe pas par la page précédente
        if(empty($session->get('adresseDepart')) && empty($session->get('adresseArrivee'))) {
@@ -96,14 +93,19 @@ class ReservationsController extends AbstractController
         $date = $session->get('date');
         $dateConvertion = date_format($date, "d/m/Y/H:i");
 
+        // Je convertis les dates pour les champs
+        date_default_timezone_set('Europe/Paris');
+        $dateReservation = date('Y/m/d');
+        $dateCompta= date( "Y");
+
         // Je refait appel à mes méthodes de calcul dans mon service afin d'avoir :
         // 1- La ditance
         // 2- La durée
         // 3- Le prix
         // Et les afficher dans ma vue
-        $km = $distance->apiCalculDistance($adress_1, $adress_2);
-        $duree = $distance->apiCalculDuree($adress_1,$adress_2);
-        $prix = $distance->apiCalculPrix($adress_1, $adress_2);
+        $km = $calcul->apiCalculDistance($adress_1, $adress_2);
+        $duree = $calcul->apiCalculDuree($adress_1,$adress_2);
+        $prix = $calcul->apiCalculPrix($adress_1, $adress_2);
 
         // Création de mon formulaire de renseignements clients
         $form = $this->createForm(CommandeType::class);
@@ -116,6 +118,7 @@ class ReservationsController extends AbstractController
             // Je crée une variable afin d'accéder aux infos des champs du formulaire
             $data = $form->getData();
 
+
             // création de mon objet (facture) pour stockage en bdd si le paiement est validé
             $facture = new Facture();
             $facture->setNom($data['nom']);
@@ -125,12 +128,12 @@ class ReservationsController extends AbstractController
             $facture->setVille($data['ville']);
             $facture->setTelephone($data['telephone']);
             $facture->setEmail($data['email']);
-            $facture->setDateReservation($data['date_reservation']);
-            $facture->setPrix($data['prix']);
-            $facture->setAdresseDepart($data['adresse_depart']);
-            $facture->setAdresseArrivee($data['adresse_arrivee']);
-            $facture->setDate($data['date']);
-            $facture->setDateCompta($data['date_compta']);
+            $facture->setDateReservation($dateReservation);
+            $facture->setPrix($prix);
+            $facture->setAdresseDepart($adress_1);
+            $facture->setAdresseArrivee($adress_2);
+            $facture->setDate($dateConvertion);
+            $facture->setDateCompta($dateCompta);
 
             // création de mon objet (client) pour stockage en bdd si le paiement est validé
             $client = new Clients();
@@ -141,20 +144,21 @@ class ReservationsController extends AbstractController
             $client->setVille($data['ville']);
             $client->setTelephone($data['telephone']);
             $client->setEmail($data['email']);
-            $client->setDateReservation($data['date_reservation']);
-            $client->setPrix($data['prix']);
-            $client->setAdresseDepart($data['adresse_depart']);
-            $client->setAdresseArrivee($data['adresse_arrivee']);
-            $client->setDate($data['date']);
+            $client->setDateReservation($dateReservation);
+            $client->setPrix($prix);
+            $client->setAdresseDepart($adress_1);
+            $client->setAdresseArrivee($adress_2);
+            $client->setDate($dateConvertion);
             $client->setConfidentialite($data['confidentialite']);
             $client->setInfos($data['infos']);
-            $client->setDuree($data['duree']);
-            $client->setUniqueId($data['unique_id']);
-            $client->setDateCompta($data['date_compta']);
+            $client->setDuree($duree);
+            $client->setUniqueId($id);
+            $client->setDateCompta($dateCompta);
 
             // j'enregistre dans la session mes deux objets afin de pouvoir les enregistrer plus tard (si le paiement est accepté)
             $session->set('facture', $facture);
             $session->set('client', $client);
+
 
             // Redirection sur la page de paiement et génération d'un ID (ID complexe= Id de la session)
             return $this->redirectToRoute('checkout', ['id' => $id], Response::HTTP_SEE_OTHER);
