@@ -1,19 +1,3 @@
-/*
- Copyright 2014 Google Inc. All rights reserved.
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
 (function (window) {
 
     if (!!window.cookieChoices) {
@@ -21,7 +5,6 @@
     }
 
     var document = window.document;
-    // IE8 does not support textContent, so we should fallback to innerText.
     var supportsTextContent = 'textContent' in document.body;
 
     var cookieChoices = (function () {
@@ -152,14 +135,14 @@
         }
 
         function _saveUserPreference() {
-            // Set the cookie expiry to one year after today.
+            // Définissez l'expiration du cookie sur un an après aujourd'hui.
             var expiryDate = new Date();
             expiryDate.setFullYear(expiryDate.getFullYear() + 1);
             document.cookie = cookieName + '=y; path=/; expires=' + expiryDate.toGMTString();
         }
 
         function _shouldDisplayConsent() {
-            // Display the header only if the cookie has not been set.
+            // Afficher l'en-tête uniquement si le cookie n'a pas été défini.
             return !document.cookie.match(new RegExp(cookieName + '=([^;]+)'));
         }
 

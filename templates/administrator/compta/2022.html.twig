@@ -16,16 +16,32 @@
             <div class="card-admin2 mt-5">
                 {% for facture in factures %}
                     <div class="row">
-
                         <div class="col">
-                            <p><strong>Date de la facture:</strong> {{ facture.dateReservation }}</p>
+                            {% if facture.prix  > 0 %}
+                                <p><strong>Type:</strong> Facture</p>
+                                {% else %}
+                                    <p><strong>Type:</strong> Avoir</p>
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            <p><strong>Date réservation:</strong> {{ facture.dateReservation }}</p>
                         </div>
                         <div class="col">
                             <p><strong>Nom client:</strong> {{ facture.nom }}</p>
                         </div>
                         <div class="col">
+                            <p><strong>Prix:</strong> {{ facture.prix }}€</p>
+                        </div>
+                        <div class="col">
                             <a href="{{ path('pdf_compta_id', {id: facture.id}) }}" class="button2 btn btn-success mb-3"
-                               target="_blank">Télécharger la facture client</a>
+                               target="_blank">Télécharger</a>
+                        </div>
+                        <div class="col">
+                            {% if facture.prix  > 0 %}
+                                <a href="{{ path('facture_avoir', {id: facture.id}) }}" class="button2 btn btn-info mb-3"
+                                   target="_blank">Transformer en avoir</a>
+                            {% endif %}
+
                         </div>
                         <hr>
                     </div>

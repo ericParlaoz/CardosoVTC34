@@ -55,25 +55,22 @@ class CourseType extends AbstractType
                         'message' => "Veuillez indiquer le nombre de passagers"
                     ]),
                     new Assert\Range([
-                        'min' => 1,
-                        'max' => 5,
+                        'min' => 1, //passagers minimum
+                        'max' => 5, //Passagers maximum
                         'notInRangeMessage' => "Le nombre de passagers doit être compris entre 1 et 5 !",
                     ]),
                 ]
             ])
             ->add('date', DateTimeType::class, [
                 'date_widget' => 'single_text',
-                'minutes' => range(0,30,30),
+                'minutes' => range(0,30,30), // Réservation uniquement toutes les 30 minutes
                 'required' => true,
-               // 'html5'=>false,
-              //  'format' => 'dd/MM/yyyy',
                 'label' => "Date de réservation",
                 'constraints' => [
                     new Assert\GreaterThan("+2 hours", message: "Veillez sélectionner une date de réservation correcte !")
-                ]
+                ] // Date de la course à partir de + 2heures de la date de saisie
             ]);
     }
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

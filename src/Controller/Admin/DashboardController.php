@@ -18,7 +18,6 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
 
     {
-            // Index de l'espace admin
             return $this->render('administrator/index.html.twig', [
             ]);
     }

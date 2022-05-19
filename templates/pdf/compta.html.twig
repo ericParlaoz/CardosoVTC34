@@ -40,7 +40,12 @@
     <div>{{ facture.telephone }}</div>
 </div>
 <H4>Date {{ facture.dateReservation }}</H4>
-<H3>Facture N° {{ facture.dateReservation }}-{{ facture.id}} </H3>
+{% if facture.prix > 0 %}
+    <H3>Facture N° {{ facture.dateReservation }}-{{ facture.id}} </H3>
+{% else %}
+    <H3>Avoir N° {{ facture.dateReservation }}-{{ facture.id}} </H3>
+{% endif %}
+
 <p>Prestation de service de tranport de passagers</p>
 <hr>
 <table class="table">

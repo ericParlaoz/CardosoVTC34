@@ -18,13 +18,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class CommandeType extends AbstractType
 {
 
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
         $builder
             ->add('nom', TextType::class,[
-                'required' => true, // Le champs est requis
+                'required' => true, // Le champ est requis
                 'label' => "Votre nom",
                 'constraints' => [
                     new NotBlank([ // Message en cas de champs vide
@@ -88,7 +87,6 @@ class CommandeType extends AbstractType
                         'min'=>10,
                         'max'=>10,
                     ])
-
                 ]
             ])
             ->add('email', EmailType::class, [
@@ -108,10 +106,9 @@ class CommandeType extends AbstractType
                 'label'    => 'Confidentialité',
                 'required' => true,
             ])
-
         ;
     }
-
+                //configureOptions
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

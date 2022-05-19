@@ -6,8 +6,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="stylesheet"
-          href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css') }}">
 {% endblock %}
 
 {% block javascripts %}
@@ -30,7 +29,7 @@
                             relative au transport de personnes et disposons de toutes les autorisations et assurances
                             nécessaires afin de vous garantir un niveau optimal de sécurité et de qualité.</p>
                         <div class="text-center mb-3">
-                            <a href="{{ path('reservation') }}" type="button" class="button btn btn-outline-light">Réserver
+                            <a href="{{ path('course') }}" type="button" class="button btn btn-outline-light">Réserver
                                 une course</a>
                             <a href="tel:0624512297" type="button" class="button2 btn btn-danger ms-3">06 24 51 22
                                 97</a>
@@ -55,7 +54,7 @@
                         circuit touristique ou du shopping, votre chauffeur privé vous fera profiter de tout son
                         savoir-faire et son professionnalisme à bord d'un véhicule confortable et équipé de tout ce dont
                         vous avez besoin pour un trajet le plus agréable possible.</p>
-                    <a type="button" class="button2 btn btn-danger mb-5" href="{{ path('reservation') }}">Réserver une
+                    <a type="button" class="button2 btn btn-danger mb-5" href="{{ path('course') }}">Réserver une
                         course</a>
                 </div>
             </div>
@@ -93,7 +92,7 @@
         </div>
         <div class="col text-center mt-3">
             <a type="button" class="button2 btn btn-danger wow animate__animated animate__zoomIn mb-5"
-               href="{{ path('reservation') }}">Réserver une course</a>
+               href="{{ path('course') }}">Réserver une course</a>
         </div>
     </section>
     <section class="section4" id="nosServices">

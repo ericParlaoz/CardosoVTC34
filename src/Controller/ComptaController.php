@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Facture;
+use App\Form\CommandeType;
 use App\Repository\FactureRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,7 +17,6 @@ class ComptaController extends AbstractController
     #[Route('/', name: 'compta_index')]
     public function index(): Response
     {
-        // Page d'index de la comptbilité
         return $this->render('administrator/compta/index.html.twig');
     }
 
@@ -33,11 +36,26 @@ class ComptaController extends AbstractController
         // afin d' afficher dans ma vue les nombres de courses
         $totalCourses = $factureRepository->countByCourses();
 
+
         return $this->render('administrator/compta/2022.html.twig', [
             'factures' => $result,
             'recettes' => $totalRecettes,
-            'courses' => $totalCourses
+            'courses' => $totalCourses,
         ]);
+    }
+
+    #[Route('/{id}/avoir', name: 'facture_avoir', methods: ['GET', 'POST'])]
+    public function edit(Facture $facture, EntityManagerInterface $entityManager): Response
+    {
+
+        $prix = $facture->getPrix();
+
+        $prixNegatif = -$prix;
+        $facture->setPrix($prixNegatif);
+        $entityManager->flush();
+
+
+        return $this->redirectToRoute('compta_index', [], Response::HTTP_SEE_OTHER);
     }
 
 

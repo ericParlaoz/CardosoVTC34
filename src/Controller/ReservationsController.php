@@ -13,20 +13,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/reservation')]
+#[Route('/course')]
 class ReservationsController extends AbstractController
 {
-    #[Route('/', name: 'reservation')]
-    public function newCourseBDD(Request $request, CalculCourse $calcul)
+    #[Route('/', name: 'course')]
+    public function newCourse(Request $request, CalculCourse $calcul)
     {
-
         // Création de mon formulaire de calcul de course
         $form = $this->createForm(CourseType::class);
         // Hydratation de mon formulaire
         $form->handleRequest($request);
 
-
-        // Si le formulaire et soumis et valide :
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Je recupère ici les infos saisies dans mon formulaire
@@ -54,7 +51,6 @@ class ReservationsController extends AbstractController
             // Mes différebtes conditions
             if ($kmTotal === 0.0 || $adress_1 === false || $adress_2 === false )  {
                 $this->addFlash('error', "Erreur: Veillez renseigner par des adresses valides !");
-
             }
             else if ( $kmTotal > 800  ) {
                 $this->addFlash('error', "Grande distance sur devis");
@@ -62,17 +58,14 @@ class ReservationsController extends AbstractController
             else if ( $kmDepart > 400  ) {
                 $this->addFlash('error', "Erreur: Ville de départ non prise en charge !");
             }
-
             else if ( $kmDepart > 200 && $kmTotal < 150  ) {
                 $this->addFlash('error', "La distance de la course n'est pas suffisante !");
             }
-
             // Redirection si on ne rentre pas dans les conditions précédentes
             else {
                 return $this->redirectToRoute('commande');
             }
         }
-
         return $this->render('reservations/index.html.twig', [
             'formulaireCourse' => $form->createView(),
         ]);
@@ -81,12 +74,12 @@ class ReservationsController extends AbstractController
     #[Route('/commande', name: 'commande')]
     public function newCommande(SessionInterface $session, Request $request, CalculCourse $calcul): Response
     {
-        // Je corrige l'erreur d'accès à cette route si on passe pas par la page précédente
+        // Je corrige l'erreur d'accès à cette route (session obligatoire)
        if(empty($session->get('adresseDepart')) && empty($session->get('adresseArrivee'))) {
        return $this->redirectToRoute('accueil');
       }
 
-        // Je récupère ici les infos enregistrés précedemment dans la session pour les afficher dans ma vue
+        // Je récupère ici les infos enregistrées précedemment dans la session pour les afficher dans ma vue
         $id = $session->getId();
         $adress_1 = $session->get('adresseDepart');
         $adress_2 = $session->get('adresseArrivee');
@@ -98,26 +91,23 @@ class ReservationsController extends AbstractController
         $dateReservation = date('Y/m/d');
         $dateCompta= date( "Y");
 
-        // Je refait appel à mes méthodes de calcul dans mon service afin d'avoir :
-        // 1- La ditance
-        // 2- La durée
-        // 3- Le prix
+        // Je refais appel à mes méthodes de calcul dans mon service afin d'avoir : ma distance, ma durée, mon prix
         // Et les afficher dans ma vue
         $km = $calcul->apiCalculDistance($adress_1, $adress_2);
         $duree = $calcul->apiCalculDuree($adress_1,$adress_2);
         $prix = $calcul->apiCalculPrix($adress_1, $adress_2);
 
+        // Je modifie le mot "hours" par "heures"
+       $dureeVue = str_replace("hours", "heures", $duree);
+
         // Création de mon formulaire de renseignements clients
         $form = $this->createForm(CommandeType::class);
-        // Hydratation de mon formulaire
         $form->handleRequest($request);
 
-        // Si le formulaire et soumis et valide :
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Je crée une variable afin d'accéder aux infos des champs du formulaire
             $data = $form->getData();
-
 
             // création de mon objet (facture) pour stockage en bdd si le paiement est validé
             $facture = new Facture();
@@ -159,7 +149,6 @@ class ReservationsController extends AbstractController
             $session->set('facture', $facture);
             $session->set('client', $client);
 
-
             // Redirection sur la page de paiement et génération d'un ID (ID complexe= Id de la session)
             return $this->redirectToRoute('checkout', ['id' => $id], Response::HTTP_SEE_OTHER);
         }
@@ -171,10 +160,8 @@ class ReservationsController extends AbstractController
             'adresseArrivee' => $adress_2,
             'prix' => $prix,
             'distance' => $km,
-            'duree' => $duree,
-
+            'duree' => $dureeVue,
         ]);
     }
-
 }
 
