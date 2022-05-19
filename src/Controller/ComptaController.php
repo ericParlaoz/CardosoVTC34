@@ -25,22 +25,30 @@ class ComptaController extends AbstractController
     {
         // Je stock dans la variable result toutes les courses de 2022 classé par ID récent au plus ancien
         // Je l'envoie dans ma vue
-        $result = $factureRepository->findBy(['date_compta' => '2022'],['id' => 'DESC']);
+        $result = $factureRepository->findBy(['date_compta' => '2022'], ['id' => 'DESC']);
+        $date = $factureRepository->findBy(['date_compta' => '2022'], ['id' => 'DESC'],100,1 );
 
         // Je boucle tous les prix des courses présentes et je les additionne
         $totalRecettes = 0;
-        foreach ($result as $value){
-           $totalRecettes += $value->getPrix();
+        foreach ($result as $value) {
+            $totalRecettes += $value->getPrix();
         }
+
+
+        $totalDates = "";
+        foreach ($date as $value) {
+                $totalDates .= $value->getDate();
+        }
+
         // Je fait appel à une méthode crée dans factureRepository pour compter le nombre de lignes inscrites en bdd
         // afin d' afficher dans ma vue les nombres de courses
         $totalCourses = $factureRepository->countByCourses();
-
 
         return $this->render('administrator/compta/2022.html.twig', [
             'factures' => $result,
             'recettes' => $totalRecettes,
             'courses' => $totalCourses,
+            'dates' => $totalDates
         ]);
     }
 
@@ -48,10 +56,15 @@ class ComptaController extends AbstractController
     public function edit(Facture $facture, EntityManagerInterface $entityManager): Response
     {
 
-        $prix = $facture->getPrix();
+
+        $clone = clone $facture;
+        $prix = $clone->getPrix();
+
 
         $prixNegatif = -$prix;
         $facture->setPrix($prixNegatif);
+
+        $entityManager->persist($clone);
         $entityManager->flush();
 
 

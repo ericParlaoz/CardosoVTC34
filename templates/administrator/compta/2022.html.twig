@@ -37,11 +37,12 @@
                                target="_blank">Télécharger</a>
                         </div>
                         <div class="col">
-                            {% if facture.prix  > 0 %}
-                                <a href="{{ path('facture_avoir', {id: facture.id}) }}" class="button2 btn btn-info mb-3"
+                            {% if (facture.prix  > 0) and (facture.date  not in dates ) %}
+                                <a href="{{ path('facture_avoir', {id: facture.id}) }}" class="button2 btn btn-primary mb-3"
                                    target="_blank">Transformer en avoir</a>
+                                {% else %}
+                                    Facture déjà transformer en avoir
                             {% endif %}
-
                         </div>
                         <hr>
                     </div>

@@ -46,15 +46,12 @@ class FactureRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Clients
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+
+    public function searchDate($search) {
+        return $this->createQueryBuilder('a')
+            ->where('a.date LIKE :date')
+            ->setParameter('date', '%'.$search.'%')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }
