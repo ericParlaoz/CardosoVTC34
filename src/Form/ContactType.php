@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
+use Symfony\Component\Validator\Constraints\Regex;
 
 
 class ContactType extends AbstractType
@@ -33,6 +34,11 @@ class ContactType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez saisir votre nom'
+                    ]),
+                    new Regex ([
+                        'pattern' => "/^[a-z,.àâÀéèêÉÈÊçÇ'_ -]+$/i",
+                        'match' => true,
+                        'message' => 'Les caractères spéciaux sont refusés'
                     ])
                 ]
             ])

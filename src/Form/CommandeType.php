@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 
 class CommandeType extends AbstractType
@@ -22,25 +23,35 @@ class CommandeType extends AbstractType
     {
 
         $builder
-            ->add('nom', TextType::class,[
+            ->add('nom', TextType::class, [
                 'required' => true, // Le champ est requis
                 'label' => "Votre nom",
                 'constraints' => [
                     new NotBlank([ // Message en cas de champs vide
                         'message' => 'Veuillez saisir votre nom'
+                    ]),
+                    new Regex ([
+                        'pattern' => "/^[a-z,.àâÀéèêÉÈÊçÇ'_ -]+$/i",
+                        'match' => true,
+                        'message' => 'Les caractères spéciaux sont refusés'
                     ])
                 ]
             ])
-            ->add('prenom', TextType::class ,[
+            ->add('prenom', TextType::class, [
                 'required' => true,
                 'label' => "Votre prénom",
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez saisir votre prénom'
+                    ]),
+                    new Regex ([
+                        'pattern' => "/^[a-z,.àâÀéèêÉÈÊçÇ'_ -]+$/i",
+                        'match' => true,
+                        'message' => 'Les caractères spéciaux sont refusés'
                     ])
                 ]
             ])
-            ->add('entreprise', TextType::class,[
+            ->add('entreprise', TextType::class, [
                 'required' => false,
                 'label' => "Entreprise (facultatif)",
             ])
@@ -62,8 +73,8 @@ class CommandeType extends AbstractType
                     ]),
                     new Length([
                         'min' => 4,
-                        'max'=>5,
-                        'maxMessage'=> 'Code postal non valide'
+                        'max' => 5,
+                        'maxMessage' => 'Code postal non valide'
                     ])
                 ]
             ])
@@ -73,6 +84,11 @@ class CommandeType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez saisir votre ville'
+                    ]),
+                    new Regex ([
+                        'pattern' => "/^[a-z,.àâÀéèêÉÈÊçÇ'_ -]+$/i",
+                        'match' => true,
+                        'message' => 'Les caractères spéciaux sont refusés'
                     ])
                 ]
             ])
@@ -82,10 +98,10 @@ class CommandeType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez saisir votre téléphone'
-                    ]) ,
+                    ]),
                     new Length([
-                        'min'=>10,
-                        'max'=>10,
+                        'min' => 10,
+                        'max' => 10,
                     ])
                 ]
             ])
@@ -98,17 +114,17 @@ class CommandeType extends AbstractType
                     ])
                 ]
             ])
-            ->add('infos', TextareaType::class,[
+            ->add('infos', TextareaType::class, [
                 'required' => false,
                 'label' => "Infos complémentaires (facultatif)",
             ])
             ->add('confidentialite', CheckboxType::class, [
-                'label'    => 'Confidentialité',
+                'label' => 'Confidentialité',
                 'required' => true,
-            ])
-        ;
+            ]);
     }
-                //configureOptions
+
+    //configureOptions
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

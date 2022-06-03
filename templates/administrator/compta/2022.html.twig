@@ -40,8 +40,10 @@
                             {% if (facture.prix  > 0) and (facture.date  not in dates ) %}
                                 <a href="{{ path('facture_avoir', {id: facture.id}) }}" class="button2 btn btn-primary mb-3"
                                    target="_blank">Transformer en avoir</a>
-                                {% else %}
-                                    Facture déjà transformer en avoir
+                                {% elseif facture.prix  < 0 %}
+                                    <div class="text-info">Avoir généré</div>
+                                    {% else %}
+                                        <div class="text-danger">Facture déjà transformer en avoir</div>
                             {% endif %}
                         </div>
                         <hr>

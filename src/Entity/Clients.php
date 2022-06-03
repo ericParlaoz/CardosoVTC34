@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ClientsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: ClientsRepository::class)]
 class Clients
 {
@@ -12,6 +13,7 @@ class Clients
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
+
 
     #[ORM\Column(type: 'string', length: 100)]
     private $nom;

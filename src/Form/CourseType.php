@@ -22,6 +22,7 @@ use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class CourseType extends AbstractType
 {
@@ -35,6 +36,11 @@ class CourseType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => "Veuillez saisir une adresse départ"
+                    ]),
+                    new Regex ([
+                        'pattern' => "/^[a-z0-9,.àâÀéèêÉÈÊçÇ,'_ -]+$/i",
+                        'match' => true,
+                        'message' => 'Les caractères spéciaux sont refusés'
                     ])
                 ]
             ])
@@ -44,6 +50,11 @@ class CourseType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => "Veuillez saisir une adresse d'arrivée"
+                    ]),
+                    new Regex ([
+                        'pattern' => "/^[a-z0-9,.àâÀéèêÉÈÊçÇ,'_ -]+$/i",
+                        'match' => true,
+                        'message' => 'Les caractères spéciaux sont refusés'
                     ])
                 ]
             ])
